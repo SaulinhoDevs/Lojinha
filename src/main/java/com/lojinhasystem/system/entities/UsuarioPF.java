@@ -9,6 +9,10 @@ public class UsuarioPF extends Usuario {
 
     private String cpf;
 
+    public UsuarioPF() {
+
+    }
+
     public UsuarioPF(Long id, String nome, String rua, String bairro, Integer numero, String telefone, String cpf) {
         super(id, nome, rua, bairro, numero, telefone);
         this.cpf = cpf;

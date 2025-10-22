@@ -9,6 +9,10 @@ public class UsuarioPJ extends Usuario {
 
     private String cnpj;
 
+    public UsuarioPJ() {
+
+    }
+
     public UsuarioPJ(Long id, String nome, String rua, String bairro, Integer numero, String telefone, String cnpj) {
         super(id, nome, rua, bairro, numero, telefone);
         this.cnpj = cnpj;
