@@ -1,6 +1,6 @@
 package com.lojinhasystem.system.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lojinhasystem.system.entities.enums.StatusVenda;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,6 +22,8 @@ public class Venda implements Serializable {
     private Double frete;
     private Double desconto;
 
+    private Integer status;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -29,12 +31,13 @@ public class Venda implements Serializable {
     public Venda() {
     }
 
-    public Venda(Long id, Double valorTotal, LocalDate dataVenda, Double frete, Double desconto, Cliente cliente) {
+    public Venda(Long id, Double valorTotal, LocalDate dataVenda, Double frete, Double desconto, StatusVenda status, Cliente cliente) {
         this.id = id;
         this.valorTotal = valorTotal;
         this.dataVenda = dataVenda;
         this.frete = frete;
         this.desconto = desconto;
+        setStatus(status);
         this.cliente = cliente;
     }
 
@@ -84,6 +87,16 @@ public class Venda implements Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public StatusVenda getStatus() {
+        return StatusVenda.valueOf(status);
+    }
+
+    public void setStatus(StatusVenda status) {
+        if (status != null) {
+            this.status = status.getCodigo();
+        }
     }
 
     @Override
