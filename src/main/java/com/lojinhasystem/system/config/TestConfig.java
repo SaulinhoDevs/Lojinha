@@ -30,14 +30,23 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private VendaRepository vendaRepository;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
     @Override
     public void run(String... args) throws Exception {
+
+        Categoria cat1 = new Categoria(null, "Electronics", "Produtos eletronicos");
+        Categoria cat2 = new Categoria(null, "Books", "Livraria no geral");
+        Categoria cat3 = new Categoria(null, "Computers", "Artigos computacionais");
+
         Produto p1 = new Produto(null, "Camisa Polo Masculina", 30, 79.90, 49.90);
         Produto p2 = new Produto(null, "Calça Jeans Feminina", 20, 129.90, 79.90);
         Produto p3 = new Produto(null, "Tênis Esportivo", 15, 199.90, 120.00);
         Produto p4 = new Produto(null, "Bolsa de Couro", 10, 249.90, 150.00);
         Produto p5 = new Produto(null, "Relógio Digital", 25, 149.90, 90.00);
 
+        categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
         // Pessoas Físicas
