@@ -36,9 +36,10 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Categoria cat1 = new Categoria(null, "Electronics", "Produtos eletronicos");
-        Categoria cat2 = new Categoria(null, "Books", "Livraria no geral");
-        Categoria cat3 = new Categoria(null, "Computers", "Artigos computacionais");
+        Categoria cat1 = new Categoria(null, "Eletronicos", "Produtos Eletronicos");
+        Categoria cat2 = new Categoria(null, "Masculino", "Artigos Masculinos");
+        Categoria cat3 = new Categoria(null, "Feminino", "Artigos Femininos");
+        Categoria cat4 = new Categoria(null, "Esportivo", "Artigos Esportivos");
 
         Produto p1 = new Produto(null, "Camisa Polo Masculina", 30, 79.90, 49.90);
         Produto p2 = new Produto(null, "Calça Jeans Feminina", 20, 129.90, 79.90);
@@ -46,7 +47,15 @@ public class TestConfig implements CommandLineRunner {
         Produto p4 = new Produto(null, "Bolsa de Couro", 10, 249.90, 150.00);
         Produto p5 = new Produto(null, "Relógio Digital", 25, 149.90, 90.00);
 
-        categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+        categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4));
+        produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+        p1.getCategorias().add(cat2);
+        p2.getCategorias().add(cat3);
+        p3.getCategorias().add(cat4);
+        p4.getCategorias().add(cat3);
+        p5.getCategorias().add(cat1);
+
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
         // Pessoas Físicas

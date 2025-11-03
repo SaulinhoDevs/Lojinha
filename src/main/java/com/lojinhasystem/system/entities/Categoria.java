@@ -1,9 +1,12 @@
 package com.lojinhasystem.system.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_categoria")
@@ -17,6 +20,10 @@ public class Categoria implements Serializable {
 
     private String nome;
     private String descricao;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categorias")
+    private Set<Produto> produtos = new HashSet<>();
 
     public Categoria() {
     }
@@ -49,6 +56,10 @@ public class Categoria implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Set<Produto> getProdutos() {
+        return produtos;
     }
 
     @Override
