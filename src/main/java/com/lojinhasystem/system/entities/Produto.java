@@ -1,5 +1,6 @@
 package com.lojinhasystem.system.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -25,6 +26,9 @@ public class Produto implements Serializable {
     @ManyToMany
     @JoinTable(name = "tb_produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private Set<Categoria> categorias = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> pedidos = new HashSet<>();
 
     public Produto() {
     }
@@ -79,6 +83,15 @@ public class Produto implements Serializable {
 
     public Set<Categoria> getCategorias() {
         return categorias;
+    }
+
+    @JsonIgnore
+    public Set<Venda> getVendas() {
+        Set<Venda> set = new HashSet<>();
+        for (ItemPedido x : pedidos) {
+            set.add(x.getVenda());
+        }
+        return set;
     }
 
     @Override
