@@ -33,6 +33,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -85,5 +88,12 @@ public class TestConfig implements CommandLineRunner {
 
         clienteRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5));
         vendaRepository.saveAll(Arrays.asList(v1, v2, v3, v4, v5, v6));
+
+        ItemPedido ip1 = new ItemPedido(v1, p1, 2, p1.getPrecoVenda());
+        ItemPedido ip2 = new ItemPedido(v1, p3, 1, p3.getPrecoVenda());
+        ItemPedido ip3 = new ItemPedido(v2, p2, 3, p2.getPrecoVenda());
+        ItemPedido ip4 = new ItemPedido(v2, p4, 1, p4.getPrecoVenda());
+
+        itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4));
     }
 }
