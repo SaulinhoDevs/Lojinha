@@ -19,7 +19,6 @@ public class Venda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double valorTotal;
     private LocalDate dataVenda;
     private Double frete;
     private Double desconto;
@@ -36,9 +35,8 @@ public class Venda implements Serializable {
     public Venda() {
     }
 
-    public Venda(Long id, Double valorTotal, LocalDate dataVenda, Double frete, Double desconto, StatusVenda status, Cliente cliente) {
+    public Venda(Long id, LocalDate dataVenda, Double frete, Double desconto, StatusVenda status, Cliente cliente) {
         this.id = id;
-        this.valorTotal = valorTotal;
         this.dataVenda = dataVenda;
         this.frete = frete;
         this.desconto = desconto;
@@ -52,14 +50,6 @@ public class Venda implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
     }
 
     public LocalDate getDataVenda() {
@@ -106,6 +96,14 @@ public class Venda implements Serializable {
 
     public Set<ItemPedido> getItens() {
         return itens;
+    }
+
+    public Double getTotal() {
+        double soma = 0.0;
+        for (ItemPedido x : itens) {
+            soma += x.getSubTotal();
+        }
+        return soma + getFrete() - getDesconto();
     }
 
     @Override

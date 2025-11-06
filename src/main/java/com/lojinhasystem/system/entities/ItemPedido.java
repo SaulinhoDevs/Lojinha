@@ -64,6 +64,10 @@ public class ItemPedido implements Serializable {
         this.precoUnitario = precoUnitario;
     }
 
+    public Double getSubTotal(){
+        return getPrecoUnitario() * getQuantidade();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
