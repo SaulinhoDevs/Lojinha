@@ -3,6 +3,7 @@ package com.lojinhasystem.system.config;
 import com.lojinhasystem.system.entities.*;
 import com.lojinhasystem.system.entities.enums.StatusVenda;
 import com.lojinhasystem.system.repositories.*;
+import com.lojinhasystem.system.services.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -74,13 +75,13 @@ public class TestConfig implements CommandLineRunner {
         usuarioPJRepository.saveAll(Arrays.asList(u4, u5));
 
         Cliente c1 = new Cliente(null, "Maria Oliveira", 0.0, "71988887777", "Rua das Flores", "Centro", 101);
-        Cliente c2 = new Cliente(null, "João Santos", 50.0, "71999996666", "Av. Brasil", "São José", 202);
-        Cliente c3 = new Cliente(null, "Ana Costa", 120.0, "71997778888", "Rua da Paz", "Liberdade", 303);
+        Cliente c2 = new Cliente(null, "João Santos", 0.0, "71999996666", "Av. Brasil", "São José", 202);
+        Cliente c3 = new Cliente(null, "Ana Costa", 0.0, "71997778888", "Rua da Paz", "Liberdade", 303);
         Cliente c4 = new Cliente(null, "Carlos Souza", 0.0, "71995554444", "Rua Bahia", "Cajazeiras", 404);
-        Cliente c5 = new Cliente(null, "Fernanda Lima", 200.0, "71992221111", "Rua Verde", "Brotas", 505);
+        Cliente c5 = new Cliente(null, "Fernanda Lima", 0.0, "71992221111", "Rua Verde", "Brotas", 505);
 
         Venda v1 = new Venda(null, LocalDate.of(2025, 10, 10), 20.00, 10.00, StatusVenda.PAGO, c1);
-        Venda v2 = new Venda(null, LocalDate.of(2025, 10, 11), 0.00, 0.00, StatusVenda.PARCELADO, c2);
+        Venda v2 = new Venda(null, LocalDate.of(2025, 10, 11), 0.00, 0.00, StatusVenda.AGUARDANDO_PAGAMENTO, c2);
         Venda v3 = new Venda(null, LocalDate.of(2025, 10, 12), 35.00, 50.00, StatusVenda.PAGO, c3);
         Venda v4 = new Venda(null, LocalDate.of(2025, 10, 15), 15.00, 0.00, StatusVenda.AGUARDANDO_PAGAMENTO, c4);
         Venda v5 = new Venda(null, LocalDate.of(2025, 10, 20), 0.00, 30.00, StatusVenda.PAGO, c5);
