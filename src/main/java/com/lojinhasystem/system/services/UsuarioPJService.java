@@ -1,5 +1,6 @@
 package com.lojinhasystem.system.services;
 
+import com.lojinhasystem.system.entities.UsuarioPF;
 import com.lojinhasystem.system.entities.UsuarioPJ;
 import com.lojinhasystem.system.repositories.UsuarioPJRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,7 @@ public class UsuarioPJService {
         return usuarioPJ.get();
     }
 
+    public UsuarioPJ insert(UsuarioPJ usuarioPJ) {
+        return usuarioPJRepository.save(usuarioPJ);
+    }
 }

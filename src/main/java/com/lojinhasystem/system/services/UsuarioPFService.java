@@ -23,4 +23,7 @@ public class UsuarioPFService {
         return usuarioPF.get();
     }
 
+    public UsuarioPF insert(UsuarioPF usuarioPF) {
+        return usuarioPFRepository.save(usuarioPF);
+    }
 }
