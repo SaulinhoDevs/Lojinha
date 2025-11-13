@@ -42,4 +42,10 @@ public class UsuarioPFResource {
         usuarioPFService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UsuarioPF> update(@PathVariable Long id, @RequestBody UsuarioPF obj) {
+        obj = usuarioPFService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
 }

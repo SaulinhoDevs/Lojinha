@@ -30,4 +30,16 @@ public class UsuarioPFService {
     public void delete(Long id) {
         usuarioPFRepository.deleteById(id);
     }
+
+    public UsuarioPF update(Long id, UsuarioPF obj) {
+        UsuarioPF entity = usuarioPFRepository.getReferenceById(id);
+        updateData(entity, obj);
+        return usuarioPFRepository.save(entity);
+    }
+
+    private void updateData(UsuarioPF entity, UsuarioPF obj) {
+        entity.setNome(obj.getNome());
+        entity.setTelefone(obj.getTelefone());
+        entity.setCpf(obj.getCpf());
+    }
 }

@@ -1,6 +1,5 @@
 package com.lojinhasystem.system.services;
 
-import com.lojinhasystem.system.entities.UsuarioPF;
 import com.lojinhasystem.system.entities.UsuarioPJ;
 import com.lojinhasystem.system.repositories.UsuarioPJRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +29,17 @@ public class UsuarioPJService {
 
     public void delete(Long id) {
         usuarioPJRepository.deleteById(id);
+    }
+
+    public UsuarioPJ update(Long id, UsuarioPJ obj) {
+        UsuarioPJ entity = usuarioPJRepository.getReferenceById(id);
+        updateData(entity, obj);
+        return usuarioPJRepository.save(entity);
+    }
+
+    private void updateData(UsuarioPJ entity, UsuarioPJ obj) {
+        entity.setNome(obj.getNome());
+        entity.setTelefone(obj.getTelefone());
+        entity.setCnpj(obj.getCnpj());
     }
 }

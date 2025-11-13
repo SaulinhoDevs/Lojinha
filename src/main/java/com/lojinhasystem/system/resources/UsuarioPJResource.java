@@ -43,4 +43,10 @@ public class UsuarioPJResource {
         usuarioPJService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UsuarioPJ> update(@PathVariable Long id, @RequestBody UsuarioPJ obj) {
+        obj = usuarioPJService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
 }
