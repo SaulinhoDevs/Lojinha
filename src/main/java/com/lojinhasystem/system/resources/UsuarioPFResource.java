@@ -36,4 +36,10 @@ public class UsuarioPFResource {
                 .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        usuarioPFService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

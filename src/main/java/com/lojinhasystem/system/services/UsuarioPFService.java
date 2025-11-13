@@ -26,4 +26,8 @@ public class UsuarioPFService {
     public UsuarioPF insert(UsuarioPF usuarioPF) {
         return usuarioPFRepository.save(usuarioPF);
     }
+
+    public void delete(Long id) {
+        usuarioPFRepository.deleteById(id);
+    }
 }
