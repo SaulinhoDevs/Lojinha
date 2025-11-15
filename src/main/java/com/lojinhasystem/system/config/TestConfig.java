@@ -3,6 +3,7 @@ package com.lojinhasystem.system.config;
 import com.lojinhasystem.system.entities.*;
 import com.lojinhasystem.system.entities.enums.StatusVenda;
 import com.lojinhasystem.system.repositories.*;
+import com.lojinhasystem.system.services.ClienteService;
 import com.lojinhasystem.system.services.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -36,6 +37,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    private ClienteService clienteService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -98,5 +102,12 @@ public class TestConfig implements CommandLineRunner {
         ItemPedido ip6 = new ItemPedido(v6, p5, 1, p5.getPrecoVenda());
 
         itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4, ip5, ip6));
+
+        clienteService.registrarDivida(v1);
+        clienteService.registrarDivida(v2);
+        clienteService.registrarDivida(v3);
+        clienteService.registrarDivida(v4);
+        clienteService.registrarDivida(v5);
+        clienteService.registrarDivida(v6);
     }
 }

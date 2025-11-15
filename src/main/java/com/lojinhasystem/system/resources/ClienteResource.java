@@ -1,13 +1,11 @@
 package com.lojinhasystem.system.resources;
 
 import com.lojinhasystem.system.entities.Cliente;
+import com.lojinhasystem.system.entities.UsuarioPF;
 import com.lojinhasystem.system.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +28,9 @@ public class ClienteResource {
         return ResponseEntity.ok().body(cliente);
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Cliente> updateDivida(@PathVariable Long id, @RequestBody Cliente obj) {
+        obj = clienteService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
 }
