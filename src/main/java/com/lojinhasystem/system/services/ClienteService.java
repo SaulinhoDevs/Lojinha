@@ -39,6 +39,9 @@ public class ClienteService {
     private void updateData(Cliente entity, Cliente obj) {
         entity.setNome(obj.getNome());
         entity.setTelefone(obj.getTelefone());
+        entity.setRua(obj.getRua());
+        entity.setBairro(obj.getBairro());
+        entity.setNumero(obj.getNumero());
     }
 
     @Transactional
