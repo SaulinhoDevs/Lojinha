@@ -44,6 +44,14 @@ public class ClienteService {
         entity.setNumero(obj.getNumero());
     }
 
+    public Cliente insert(Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
+
+    public void delete(Long id) {
+        clienteRepository.deleteById(id);
+    }
+
     @Transactional
     public Cliente registrarDivida(Venda obj) {
 

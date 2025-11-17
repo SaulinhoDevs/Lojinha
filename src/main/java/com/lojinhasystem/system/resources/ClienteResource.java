@@ -5,7 +5,9 @@ import com.lojinhasystem.system.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,6 +27,20 @@ public class ClienteResource {
     public ResponseEntity<Cliente> findById(@PathVariable Long id) {
         Cliente cliente = clienteService.findById(id);
         return ResponseEntity.ok().body(cliente);
+    }
+
+    @PostMapping
+    public ResponseEntity<Cliente> insert(@RequestBody Cliente obj) {
+        Cliente cliente = clienteService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        clienteService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
