@@ -23,4 +23,25 @@ public class ProdutoService {
         return produto.get();
     }
 
+    public Produto insert(Produto produto) {
+        return produtoRepository.save(produto);
+    }
+
+    public void delete(Long id) {
+        produtoRepository.deleteById(id);
+    }
+
+    public Produto update(Long id, Produto obj) {
+        Produto produto = produtoRepository.getReferenceById(id);
+        updateData(produto, obj);
+        return produtoRepository.save(produto);
+    }
+
+    private void updateData(Produto produto, Produto obj) {
+        produto.setNome(obj.getNome());
+        produto.setEstoque(obj.getEstoque());
+        produto.setPrecoVenda(obj.getPrecoVenda());
+        produto.setPrecoCompra(obj.getPrecoCompra());
+    }
+
 }

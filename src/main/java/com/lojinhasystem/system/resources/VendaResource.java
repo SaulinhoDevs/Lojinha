@@ -34,7 +34,7 @@ public class VendaResource {
     public ResponseEntity<Venda> insert(@RequestBody Venda obj) {
         Venda venda = vendaService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+                .buildAndExpand(venda.getId()).toUri();
+        return ResponseEntity.created(uri).body(venda);
     }
 }

@@ -33,8 +33,8 @@ public class UsuarioPFResource {
     public ResponseEntity<UsuarioPF> insert(@RequestBody UsuarioPF obj) {
         UsuarioPF usuarioPF = usuarioPFService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+                .buildAndExpand(usuarioPF.getId()).toUri();
+        return ResponseEntity.created(uri).body(usuarioPF);
     }
 
     @DeleteMapping(value = "/{id}")

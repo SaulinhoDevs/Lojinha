@@ -33,8 +33,8 @@ public class ClienteResource {
     public ResponseEntity<Cliente> insert(@RequestBody Cliente obj) {
         Cliente cliente = clienteService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+                .buildAndExpand(cliente.getId()).toUri();
+        return ResponseEntity.created(uri).body(cliente);
     }
 
     @DeleteMapping(value = "/{id}")

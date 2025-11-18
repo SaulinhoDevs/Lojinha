@@ -34,8 +34,8 @@ public class UsuarioPJResource {
     public ResponseEntity<UsuarioPJ> insert(@RequestBody UsuarioPJ obj) {
         UsuarioPJ usuarioPJ = usuarioPJService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+                .buildAndExpand(usuarioPJ.getId()).toUri();
+        return ResponseEntity.created(uri).body(usuarioPJ);
     }
 
     @DeleteMapping(value = "/{id}")
