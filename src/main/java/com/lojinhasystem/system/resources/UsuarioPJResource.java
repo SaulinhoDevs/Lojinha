@@ -1,6 +1,5 @@
 package com.lojinhasystem.system.resources;
 
-import com.lojinhasystem.system.entities.UsuarioPF;
 import com.lojinhasystem.system.entities.UsuarioPJ;
 import com.lojinhasystem.system.services.UsuarioPJService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class UsuarioPJResource {
     private UsuarioPJService usuarioPJService;
 
     @GetMapping
-    public ResponseEntity<List<UsuarioPJ>> findALl() {
+    public ResponseEntity<List<UsuarioPJ>> findAll() {
         List<UsuarioPJ> usuarioPJ = usuarioPJService.findAll();
         return ResponseEntity.ok().body(usuarioPJ);
     }
@@ -33,8 +32,10 @@ public class UsuarioPJResource {
     @PostMapping
     public ResponseEntity<UsuarioPJ> insert(@RequestBody UsuarioPJ obj) {
         UsuarioPJ usuarioPJ = usuarioPJService.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(usuarioPJ.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(usuarioPJ.getId())
+                .toUri();
         return ResponseEntity.created(uri).body(usuarioPJ);
     }
 
@@ -46,7 +47,7 @@ public class UsuarioPJResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<UsuarioPJ> update(@PathVariable Long id, @RequestBody UsuarioPJ obj) {
-        obj = usuarioPJService.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+        UsuarioPJ usuarioPJ = usuarioPJService.update(id, obj);
+        return ResponseEntity.ok().body(usuarioPJ);
     }
 }

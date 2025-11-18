@@ -32,8 +32,10 @@ public class ClienteResource {
     @PostMapping
     public ResponseEntity<Cliente> insert(@RequestBody Cliente obj) {
         Cliente cliente = clienteService.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(cliente.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(cliente.getId())
+                .toUri();
         return ResponseEntity.created(uri).body(cliente);
     }
 
@@ -45,7 +47,7 @@ public class ClienteResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente obj) {
-        obj = clienteService.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+        Cliente cliente = clienteService.update(id, obj);
+        return ResponseEntity.ok().body(cliente);
     }
 }

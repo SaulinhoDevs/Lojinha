@@ -19,8 +19,8 @@ public class UsuarioPFResource {
 
     @GetMapping
     public ResponseEntity<List<UsuarioPF>> findAll() {
-        List<UsuarioPF> usuarioPF = usuarioPFService.findAll();
-        return ResponseEntity.ok().body(usuarioPF);
+        List<UsuarioPF> usuariosPF = usuarioPFService.findAll();
+        return ResponseEntity.ok().body(usuariosPF);
     }
 
     @GetMapping(value = "/{id}")
@@ -32,8 +32,10 @@ public class UsuarioPFResource {
     @PostMapping
     public ResponseEntity<UsuarioPF> insert(@RequestBody UsuarioPF obj) {
         UsuarioPF usuarioPF = usuarioPFService.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(usuarioPF.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(usuarioPF.getId())
+                .toUri();
         return ResponseEntity.created(uri).body(usuarioPF);
     }
 
@@ -45,7 +47,7 @@ public class UsuarioPFResource {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<UsuarioPF> update(@PathVariable Long id, @RequestBody UsuarioPF obj) {
-        obj = usuarioPFService.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+        UsuarioPF usuarioPF = usuarioPFService.update(id, obj);
+        return ResponseEntity.ok().body(usuarioPF);
     }
 }

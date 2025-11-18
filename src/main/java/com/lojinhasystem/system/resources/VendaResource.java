@@ -1,6 +1,5 @@
 package com.lojinhasystem.system.resources;
 
-import com.lojinhasystem.system.entities.UsuarioPF;
 import com.lojinhasystem.system.entities.Venda;
 import com.lojinhasystem.system.services.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +32,10 @@ public class VendaResource {
     @PostMapping
     public ResponseEntity<Venda> insert(@RequestBody Venda obj) {
         Venda venda = vendaService.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(venda.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(venda.getId())
+                .toUri();
         return ResponseEntity.created(uri).body(venda);
     }
 }
