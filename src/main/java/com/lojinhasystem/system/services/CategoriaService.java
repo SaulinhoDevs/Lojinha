@@ -22,4 +22,23 @@ public class CategoriaService {
         Optional<Categoria> categoria = categoriaRepository.findById(id);
         return categoria.get();
     }
+
+    public Categoria update(Long id, Categoria obj) {
+        Categoria entity = categoriaRepository.getReferenceById(id);
+        updateData(entity, obj);
+        return categoriaRepository.save(entity);
+    }
+
+    private void updateData(Categoria entity, Categoria obj) {
+        entity.setNome(obj.getNome());
+        entity.setDescricao(obj.getDescricao());
+    }
+
+    public Categoria insert(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
+
+    public void delete(Long id) {
+        categoriaRepository.deleteById(id);
+    }
 }
