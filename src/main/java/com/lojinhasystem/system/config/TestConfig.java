@@ -3,8 +3,7 @@ package com.lojinhasystem.system.config;
 import com.lojinhasystem.system.entities.*;
 import com.lojinhasystem.system.entities.enums.StatusVenda;
 import com.lojinhasystem.system.repositories.*;
-import com.lojinhasystem.system.services.ClienteService;
-import com.lojinhasystem.system.services.VendaService;
+import com.lojinhasystem.system.services.DividaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +38,7 @@ public class TestConfig implements CommandLineRunner {
     private ItemPedidoRepository itemPedidoRepository;
 
     @Autowired
-    private ClienteService clienteService;
+    private DividaService dividaService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -103,11 +102,11 @@ public class TestConfig implements CommandLineRunner {
 
         itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4, ip5, ip6));
 
-        clienteService.registrarDivida(v1);
-        clienteService.registrarDivida(v2);
-        clienteService.registrarDivida(v3);
-        clienteService.registrarDivida(v4);
-        clienteService.registrarDivida(v5);
-        clienteService.registrarDivida(v6);
+        dividaService.registrarDivida(v1);
+        dividaService.registrarDivida(v2);
+        dividaService.registrarDivida(v3);
+        dividaService.registrarDivida(v4);
+        dividaService.registrarDivida(v5);
+        dividaService.registrarDivida(v6);
     }
 }
