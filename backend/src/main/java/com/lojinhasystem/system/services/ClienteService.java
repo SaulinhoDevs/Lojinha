@@ -1,0 +1,50 @@
+package com.lojinhasystem.system.services;
+
+import com.lojinhasystem.system.entities.Cliente;
+import com.lojinhasystem.system.repositories.ClienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ClienteService {
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private VendaService vendaService;
+
+    public List<Cliente> findAll() {
+        return clienteRepository.findAll();
+    }
+
+    public Cliente findById(Long id) {
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        return cliente.get();
+    }
+
+    public Cliente update(Long id, Cliente obj) {
+        Cliente entity = clienteRepository.getReferenceById(id);
+        updateData(entity, obj);
+        return clienteRepository.save(entity);
+    }
+
+    private void updateData(Cliente entity, Cliente obj) {
+        entity.setNome(obj.getNome());
+        entity.setTelefone(obj.getTelefone());
+        entity.setRua(obj.getRua());
+        entity.setBairro(obj.getBairro());
+        entity.setNumero(obj.getNumero());
+    }
+
+    public Cliente insert(Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
+
+    public void delete(Long id) {
+        clienteRepository.deleteById(id);
+    }
+}

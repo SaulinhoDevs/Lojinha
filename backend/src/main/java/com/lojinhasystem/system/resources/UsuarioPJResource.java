@@ -1,0 +1,53 @@
+package com.lojinhasystem.system.resources;
+
+import com.lojinhasystem.system.entities.UsuarioPJ;
+import com.lojinhasystem.system.services.UsuarioPJService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/usuarios/pj")
+public class UsuarioPJResource {
+
+    @Autowired
+    private UsuarioPJService usuarioPJService;
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioPJ>> findAll() {
+        List<UsuarioPJ> usuarioPJ = usuarioPJService.findAll();
+        return ResponseEntity.ok().body(usuarioPJ);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UsuarioPJ> findById(@PathVariable Long id) {
+        UsuarioPJ usuarioPJ = usuarioPJService.findById(id);
+        return ResponseEntity.ok().body(usuarioPJ);
+    }
+
+    @PostMapping
+    public ResponseEntity<UsuarioPJ> insert(@RequestBody UsuarioPJ obj) {
+        UsuarioPJ usuarioPJ = usuarioPJService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(usuarioPJ.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(usuarioPJ);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        usuarioPJService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UsuarioPJ> update(@PathVariable Long id, @RequestBody UsuarioPJ obj) {
+        UsuarioPJ usuarioPJ = usuarioPJService.update(id, obj);
+        return ResponseEntity.ok().body(usuarioPJ);
+    }
+}
