@@ -2,6 +2,7 @@ package com.lojinhasystem.system.services;
 
 import com.lojinhasystem.system.entities.Cliente;
 import com.lojinhasystem.system.repositories.ClienteRepository;
+import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class ClienteService {
 
     public Cliente findById(Long id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente.get();
+        return cliente.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Cliente update(Long id, Cliente obj) {
