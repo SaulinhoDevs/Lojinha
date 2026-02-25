@@ -2,6 +2,7 @@ package com.lojinhasystem.system.services;
 
 import com.lojinhasystem.system.entities.Categoria;
 import com.lojinhasystem.system.repositories.CategoriaRepository;
+import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class CategoriaService {
 
     public Categoria findById(Long id) {
         Optional<Categoria> categoria = categoriaRepository.findById(id);
-        return categoria.get();
+        return categoria.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Categoria update(Long id, Categoria obj) {
