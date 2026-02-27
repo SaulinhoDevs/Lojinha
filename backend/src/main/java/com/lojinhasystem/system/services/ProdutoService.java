@@ -30,10 +30,11 @@ public class ProdutoService {
     }
 
     public void delete(Long id) {
-        if (!produtoRepository.existsById(id)) {
+        if (produtoRepository.existsById(id)) {
+            produtoRepository.deleteById(id);
+        } else {
             throw new ResourceNotFoundException(id);
         }
-        produtoRepository.deleteById(id);
     }
 
     public Produto update(Long id, Produto obj) {
