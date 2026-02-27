@@ -3,6 +3,7 @@ package com.lojinhasystem.system.services;
 import com.lojinhasystem.system.entities.ItemPedido;
 import com.lojinhasystem.system.entities.Venda;
 import com.lojinhasystem.system.repositories.VendaRepository;
+import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class VendaService {
 
     public Venda findById(Long id) {
         Optional<Venda> venda = vendaRepository.findById(id);
-        return venda.get();
+        return venda.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Venda insert(Venda obj) {

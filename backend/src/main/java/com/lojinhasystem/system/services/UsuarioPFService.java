@@ -2,6 +2,7 @@ package com.lojinhasystem.system.services;
 
 import com.lojinhasystem.system.entities.UsuarioPF;
 import com.lojinhasystem.system.repositories.UsuarioPFRepository;
+import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UsuarioPFService {
 
     public UsuarioPF findById(Long id) {
         Optional<UsuarioPF> usuarioPF = usuarioPFRepository.findById(id);
-        return usuarioPF.get();
+        return usuarioPF.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public UsuarioPF insert(UsuarioPF usuarioPF) {
