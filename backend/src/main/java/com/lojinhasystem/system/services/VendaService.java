@@ -29,6 +29,14 @@ public class VendaService {
         return vendaRepository.save(obj);
     }
 
+    public void delete(Long id) {
+        if (vendaRepository.existsById(id)) {
+            vendaRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException(id);
+        }
+    }
+
     public Double calcularTotalVenda(Venda venda) {
         double soma = venda.getItens().stream()
                 .mapToDouble(ItemPedido::getSubTotal)

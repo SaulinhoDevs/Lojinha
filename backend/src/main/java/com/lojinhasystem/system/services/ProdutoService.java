@@ -4,6 +4,7 @@ import com.lojinhasystem.system.entities.Produto;
 import com.lojinhasystem.system.repositories.ProdutoRepository;
 import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public class ProdutoService {
     }
 
     public void delete(Long id) {
+        if (!produtoRepository.existsById(id)) {
+            throw new ResourceNotFoundException(id);
+        }
         produtoRepository.deleteById(id);
     }
 
