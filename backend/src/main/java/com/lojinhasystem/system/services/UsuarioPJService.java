@@ -2,8 +2,10 @@ package com.lojinhasystem.system.services;
 
 import com.lojinhasystem.system.entities.UsuarioPJ;
 import com.lojinhasystem.system.repositories.UsuarioPJRepository;
+import com.lojinhasystem.system.services.exceptions.DatabaseException;
 import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +31,15 @@ public class UsuarioPJService {
     }
 
     public void delete(Long id) {
-        usuarioPJRepository.deleteById(id);
+        try {
+            if (usuarioPJRepository.existsById(id)) {
+                usuarioPJRepository.deleteById(id);
+            } else {
+                throw new ResourceNotFoundException(id);
+            }
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public UsuarioPJ update(Long id, UsuarioPJ obj) {

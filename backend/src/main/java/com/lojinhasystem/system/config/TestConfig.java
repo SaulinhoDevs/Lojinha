@@ -99,8 +99,9 @@ public class TestConfig implements CommandLineRunner {
         ItemPedido ip4 = new ItemPedido(v4, p4, 1, p4.getPrecoVenda());
         ItemPedido ip5 = new ItemPedido(v5, p5, 2, p5.getPrecoVenda());
         ItemPedido ip6 = new ItemPedido(v6, p5, 1, p5.getPrecoVenda());
+        ItemPedido ip7 = new ItemPedido(v1, p2, 1, p2.getPrecoVenda());
 
-        itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4, ip5, ip6));
+        itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4, ip5, ip6, ip7));
 
         dividaService.registrarDivida(v1);
         dividaService.registrarDivida(v2);
