@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importando a fonte Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Definindo a paleta de cores */
+:root {
+  --primary-color: #4caf50; /* Exemplo de cor principal */
+  --secondary-color: #ff9800; /* Exemplo de cor secundária */
+  --background-color: #f4f7fc;
+  --text-color: #333;
+  --highlight-color: #ff4081;
+}
+
+/* Estilos globais */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+/* Responsividade global */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* Escondendo a barra lateral em telas pequenas */
+  }
+
+  header {
+    flex-direction: column;
+  }
+}
