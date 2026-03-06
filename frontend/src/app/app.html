@@ -7,3 +7,34 @@
 
     <!-- Sidebar -->
     <app-sidebar [class.open]="isSidebarOpen()" class="app-sidebar"></app-sidebar>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <app-header (click)="isSidebarOpen() && toggleSidebar()"></app-header>
+
+        <!-- Mobile Toggle Button -->
+        <button (click)="toggleSidebar()" class="mobile-toggle" aria-label="Toggle Menu">
+            <span class="toggle-text">{{ isSidebarOpen() ? 'Fechar' : 'Menu' }}</span>
+        </button>
+
+        <main class="content-area">
+            <div class="content-wrapper">
+                <div class="hero-card">
+                    <h2 class="hero-title">Lojinha</h2>
+                    <p class="hero-subtitle">O seu assistente virtual</p>
+
+                    <div class="info-grid">
+                        <div class="info-card welcome">
+                            <h3 class="info-title">Bem-vindo de volta!</h3>
+                            <p class="info-text">Gerencie seus produtos e vendas de forma simples e rápida.</p>
+                        </div>
+                        <div class="info-card status">
+                            <h3 class="info-title">Status do Sistema</h3>
+                            <p class="info-text">Tudo funcionando perfeitamente. 12 novas vendas hoje.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

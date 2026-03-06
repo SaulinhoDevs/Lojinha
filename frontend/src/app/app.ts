@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from './componentes/sidebar/sidebar';
 import { CommonModule } from '@angular/common';
+import { Header } from './componentes/header/header';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
-  imports: [RouterOutlet, Sidebar, CommonModule],
+  imports: [RouterOutlet, Sidebar, Header, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
