@@ -1,0 +1,22 @@
+<aside class="sidebar">
+    <!-- Logo Space -->
+    <div class="logo-container">
+        <span class="logo-text">Lojinha</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        @for (item of menuItems; track item.label) {
+        <a href="#" class="nav-link">
+            <span class="nav-label">{{item.label}}</span>
+        </a>
+        }
+    </nav>
+
+    <!-- Logout -->
+    <div class="logout-container">
+        <button class="logout-btn">
+            <span class="nav-label">Sair</span>
+        </button>
+    </div>
+</aside>
