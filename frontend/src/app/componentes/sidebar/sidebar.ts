@@ -14,6 +14,6 @@ export class Sidebar {
     { label: 'Início', route: '/inicio' },
     { label: 'Produtos' },
     { label: 'Vendas' },
-    { label: 'Clientes' },
+    { label: 'Clientes', route: '/clientes' },
   ];
 }

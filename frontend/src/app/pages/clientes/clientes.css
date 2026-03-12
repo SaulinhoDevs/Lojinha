@@ -1,0 +1,77 @@
+.clientes-container {
+  padding: 30px;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cliente-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.cliente-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.top-row,
+.middle-row,
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.top-row .col {
+  flex: 1;
+}
+
+.middle-row {
+  justify-content: flex-start;
+  gap: 10px; /* espaço entre "Dívida" e valor */
+}
+
+.label {
+  font-weight: 500;
+  color: #555;
+  margin-right: 5px;
+}
+
+.value {
+  font-weight: 600;
+  color: #111;
+}
+
+.debt {
+  color: #d9534f; /* vermelho suave para dívidas */
+}
+
+.bottom-row {
+  flex-direction: column;
+  align-items: center;
+}
+
+.address-title {
+  margin-bottom: 8px;
+}
+
+.address-details {
+  display: flex;
+  justify-content: center; /* centraliza os itens */
+  gap: 25px; /* espaço entre Rua, Bairro e Número */
+  flex-wrap: wrap;
+  font-weight: 500;
+  color: #333;
+}
