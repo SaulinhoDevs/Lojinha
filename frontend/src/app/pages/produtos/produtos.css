@@ -1,0 +1,120 @@
+/* Container centralizado */
+.produtos-container {
+  padding: 30px;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card principal */
+.produto-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 20px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.produto-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Layout do conteúdo do card */
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Informações do produto */
+.info {
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.label {
+  font-weight: 500;
+  color: #555;
+  margin-right: 5px;
+}
+
+.value {
+  font-weight: 600;
+  color: #111;
+}
+
+/* Categorias */
+.categories {
+  margin-top: 15px;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* espaço dinâmico entre categorias */
+  margin-top: 8px;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cat-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.cat-desc {
+  font-weight: 400;
+  color: #666;
+  margin-left: 10px;
+}
+
+/* Botões de ação */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit {
+  background-color: #f0c040; /* amarelo */
+  color: #111;
+}
+
+.edit:hover {
+  background-color: #e6b837;
+}
+
+.delete {
+  background-color: #d9534f; /* vermelho */
+  color: #fff;
+}
+
+.delete:hover {
+  background-color: #c9302c;
+}

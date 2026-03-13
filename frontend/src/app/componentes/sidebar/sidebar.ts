@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 export class Sidebar {
   menuItems = [
     { label: 'Início', route: '/inicio' },
-    { label: 'Produtos' },
+    { label: 'Produtos', route: '/produtos' },
     { label: 'Vendas' },
     { label: 'Clientes', route: '/clientes' },
   ];
