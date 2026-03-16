@@ -1,3 +1,4 @@
+import { Vendas } from './pages/vendas/vendas';
 import { Inicio } from './pages/inicio/inicio';
 import { Clientes } from './pages/clientes/clientes';
 import { Produtos } from './pages/produtos/produtos';
@@ -8,4 +9,5 @@ export const routes: Routes = [
   { path: 'inicio', component: Inicio },
   { path: 'produtos', component: Produtos },
   { path: 'clientes', component: Clientes },
+  {path: 'vendas', component: Vendas },
 ];
