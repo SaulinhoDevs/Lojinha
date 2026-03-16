@@ -1,61 +1,42 @@
 <div class="clientes-container">
+  <!-- Botão para adicionar novo cliente, centralizado -->
+  <div class="header">
+    <button class="btn add-client">Novo Cliente</button>
+  </div>
 
-    <div class="cliente-card">
-        <div class="top-row">
-            <div class="col">
-                <span class="label">Nome:</span>
-                <span class="value">Ana Nascimento</span>
-            </div>
-            <div class="col">
-                <span class="label">Telefone:</span>
-                <span class="value">(75) 98888-8888</span>
-            </div>
-        </div>
-
-        <div class="middle-row">
-            <span class="label">Dívida:</span>
-            <span class="value debt">R$ 200,00</span>
-        </div>
-
-        <div class="bottom-row">
-            <div class="address-title">
-                <span class="label">Endereço:</span>
-            </div>
-            <div class="address-details">
-                <span><strong>Rua:</strong> Avenida Esperança </span>
-                <span><strong>Bairro:</strong> Maria Preta </span>
-                <span><strong>Número:</strong> 452 </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="cliente-card">
-        <div class="top-row">
-            <div class="col">
-                <span class="label">Nome:</span>
-                <span class="value">João Silva</span>
-            </div>
-            <div class="col">
-                <span class="label">Telefone:</span>
-                <span class="value">(11) 99999-9999</span>
-            </div>
-        </div>
-
-        <div class="middle-row">
-            <span class="label">Dívida:</span>
-            <span class="value debt">R$ 150,00</span>
-        </div>
-
-        <div class="bottom-row">
-            <div class="address-title">
-                <span class="label">Endereço:</span>
-            </div>
-            <div class="address-details">
-                <span><strong>Rua:</strong> Rua das Flores</span>
-                <span><strong>Bairro:</strong> Jardim</span>
-                <span><strong>Número:</strong> 123</span>
-            </div>
-        </div>
-    </div>
-
+  <!-- Tabela de clientes -->
+  <div class="clientes-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Dívida</th>
+          <th></th> <!-- Removido o título "Ações" -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cliente A</td>
+          <td>(11) 12345-6789</td>
+          <td class="dívida">R$ 500,00</td>
+          <td class="actions">
+            <button class="btn details">Detalhes</button>
+            <button class="btn edit">Editar</button>
+            <button class="btn delete">Excluir</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Cliente B</td>
+          <td>(11) 98765-4321</td>
+          <td class="dívida">R$ 200,00</td>
+          <td class="actions">
+            <button class="btn details">Detalhes</button>
+            <button class="btn edit">Editar</button>
+            <button class="btn delete">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

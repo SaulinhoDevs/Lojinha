@@ -1,108 +1,103 @@
-/* Container centralizado */
+/* Estilos principais para o card de produtos */
 .produtos-container {
-  padding: 30px;
+  padding: 20px;
   background-color: #f4f6f8;
   min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 30px;
 }
 
-/* Card principal */
-.produto-card {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 700px;
+.header {
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-}
-
-.produto-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-/* Layout do conteúdo do card */
-.card-content {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-/* Informações do produto */
-.info {
-  flex: 1;
-}
-
-.row {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 10px;
-}
-
-.label {
-  font-weight: 500;
-  color: #555;
-  margin-right: 5px;
-}
-
-.value {
-  font-weight: 600;
-  color: #111;
-}
-
-/* Categorias */
-.categories {
-  margin-top: 15px;
-}
-
-.category-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* espaço dinâmico entre categorias */
-  margin-top: 8px;
-}
-
-.category-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.cat-name {
-  font-weight: 600;
-  color: #333;
-}
-
-.cat-desc {
-  font-weight: 400;
-  color: #666;
-  margin-left: 10px;
-}
-
-/* Botões de ação */
-.actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .btn {
-  padding: 8px 16px;
+  padding: 12px 18px;
   border: none;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s, transform 0.2s;
+  text-align: center;
+}
+
+.add-product {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  width: 180px;
+}
+
+.add-product:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Tabela de produtos */
+.produto-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.produto-table th, .produto-table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.produto-table th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.produto-table td {
+  background-color: #fff;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.produto-table td:first-child {
+  border-left: 1px solid #ddd;
+}
+
+.produto-table td:last-child {
+  border-right: 1px solid #ddd;
+}
+
+/* Botões na tabela */
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.details, .edit, .delete {
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+
+.details {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.details:hover {
+  background-color: #138496;
 }
 
 .edit {
-  background-color: #f0c040; /* amarelo */
+  background-color: #f0c040;
   color: #111;
 }
 
@@ -111,10 +106,69 @@
 }
 
 .delete {
-  background-color: #d9534f; /* vermelho */
+  background-color: #d9534f;
   color: #fff;
 }
 
 .delete:hover {
   background-color: #c9302c;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .produtos-container {
+    padding: 15px; /* Diminui o padding nas telas menores */
+  }
+
+  .btn {
+    width: 100%; /* Torna os botões de "Novo Produto" mais largos em telas pequenas */
+    margin-bottom: 10px;
+  }
+
+  .produto-table {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .produto-table th {
+    font-size: 12px;
+  }
+
+  .produto-table td {
+    font-size: 12px;
+  }
+
+  .actions {
+    flex-direction: column; /* Empilha os botões em dispositivos menores */
+    gap: 10px;
+    align-items: center;
+  }
+
+  .produto-table td {
+    padding: 12px; /* Diminui o padding das células */
+  }
+}
+
+@media (max-width: 480px) {
+  .produtos-container {
+    padding: 10px; /* Menos padding para telas pequenas */
+  }
+
+  .btn {
+    width: 100%; /* Botões maiores em telas pequenas */
+  }
+
+  .produto-table th, .produto-table td {
+    font-size: 11px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .produto-table td {
+    padding: 10px; /* Menos padding nas células */
+  }
 }
