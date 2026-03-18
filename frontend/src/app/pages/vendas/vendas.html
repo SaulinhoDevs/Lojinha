@@ -18,24 +18,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>10/03/2026</td>
-          <td>R$ 50,00</td>
-          <td>10%</td>
-          <td>R$ 45,00</td>
-          <td>Concluída</td>
-          <td class="actions">
-            <button class="btn details">Detalhes</button>
-            <button class="btn edit">Editar</button>
-            <button class="btn delete">Excluir</button>
-          </td>
-        </tr>
-        <tr>
-          <td>12/03/2026</td>
-          <td>R$ 20,00</td>
-          <td>5%</td>
-          <td>R$ 80,00</td>
-          <td>Parcelada</td>
+        <tr *ngFor="let venda of vendas">
+          <td>{{ venda.dataVenda | date:'dd/MM/yyyy' }}</td>
+          <td>R$ {{ venda.frete | number:'1.2-2' }}</td>
+          <td>R$ {{ venda.desconto | number:'1.2-2' }}</td>
+          <td>R$ {{ venda.total | number:'1.2-2' }}</td>
+          <td>{{ venda.status }}</td>
           <td class="actions">
             <button class="btn details">Detalhes</button>
             <button class="btn edit">Editar</button>
