@@ -17,22 +17,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Produto A</td>
-          <td>50</td>
-          <td>R$ 100,00</td>
-          <td>R$ 150,00</td>
-          <td class="actions">
-            <button class="btn details">Detalhes</button>
-            <button class="btn edit">Editar</button>
-            <button class="btn delete">Excluir</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Produto B</td>
-          <td>30</td>
-          <td>R$ 80,00</td>
-          <td>R$ 120,00</td>
+        <tr *ngFor="let produto of produtos">
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.estoque }}</td>
+          <td>R$ {{ produto.precoCompra | number:'1.2-2' }}</td>
+          <td>R$ {{ produto.precoVenda | number:'1.2-2' }}</td>
           <td class="actions">
             <button class="btn details">Detalhes</button>
             <button class="btn edit">Editar</button>

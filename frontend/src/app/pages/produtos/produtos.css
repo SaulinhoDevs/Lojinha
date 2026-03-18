@@ -42,8 +42,7 @@
 .produto-table table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 12px;
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
 }
 
@@ -58,6 +57,7 @@
   color: #333;
   text-transform: uppercase;
   font-size: 14px;
+  width: 100vw;
 }
 
 .produto-table td {

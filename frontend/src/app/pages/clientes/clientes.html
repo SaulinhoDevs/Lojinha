@@ -19,7 +19,7 @@
         <tr *ngFor="let cliente of clientes">
           <td>{{cliente.nome}}</td>
           <td>{{cliente.telefone}}</td>
-          <td class="dívida">R$ {{cliente.divida}}</td>
+          <td class="dívida">R$ {{cliente.divida | number:'1.2-2' }}</td>
           <td class="actions">
             <button class="btn details">Detalhes</button>
             <button class="btn edit">Editar</button>
