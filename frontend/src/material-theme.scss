@@ -35,3 +35,10 @@ body {
   margin: 0;
   height: 100%;
 }
+
+:root {
+  @include mat.toolbar-overrides((
+    container-background-color: #d7e3ff,
+    container-text-color: #005cbb,
+  ));
+}
