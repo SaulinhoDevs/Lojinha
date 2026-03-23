@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -21,22 +21,31 @@ import { NgClass } from '@angular/common';
   templateUrl: './chat-bot.html',
   styleUrl: './chat-bot.css',
 })
+
 export class ChatBot {
+
+  @ViewChild('chatHistory')
+  private chatHistory!: ElementRef;
+
   userInput = '';
+
+  isLoading = false;
 
   messages = signal([{ text: 'Olá! Como posso te ajudar hoje?', isBot: true }]);
 
   sendMessage() {
     this.trimUserMessage();
-    if (this.userInput !== '') {
+    if (this.userInput !== '' && !this.isLoading) {
       this.updateMessages(this.userInput);
+      this.isLoading = true;
       this.userInput = '';
       this.simulateResponse();
     }
   }
 
-  private updateMessages(text: string, isBot = false){
+  private updateMessages(text: string, isBot = false) {
     this.messages.update((messages) => [...messages, { text: text, isBot: isBot }]);
+    this.scrollToBottom();
   }
 
   private trimUserMessage() {
@@ -47,7 +56,13 @@ export class ChatBot {
     setTimeout(() => {
       const response = 'Esta é uma resposta simulada do bot.';
       this.updateMessages(response, true);
+      this.isLoading = false;
     }, 2000);
   }
 
+  private scrollToBottom() {
+    try {
+      this.chatHistory.nativeElement.scrollTop = this.chatHistory.nativeElement.scrollHeight;
+    } catch (err) {}
+  }
 }
