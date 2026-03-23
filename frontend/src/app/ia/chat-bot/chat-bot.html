@@ -27,7 +27,7 @@
   <div class="chat-input">
     <mat-form-field class="full-width">
       <mat-label>Pergunte-me sobre a sua loja.</mat-label>
-      <input matInput [(ngModel)]="userInput" (keyup.enter)="sendMessage()">
+      <input matInput [(ngModel)]="userInput" (keyup.enter)="sendMessage()" [disabled]="isLoading">
       <button matSuffix mat-icon-button aria-label="Send" (click)="sendMessage()" [disabled]="isLoading">
         <mat-icon>send</mat-icon>
       </button>

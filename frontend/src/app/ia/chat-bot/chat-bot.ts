@@ -1,4 +1,4 @@
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { ChatService } from '../services/chat-service';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-chat-bot',
@@ -21,15 +23,17 @@ import { NgClass } from '@angular/common';
   templateUrl: './chat-bot.html',
   styleUrl: './chat-bot.css',
 })
-
 export class ChatBot {
-
   @ViewChild('chatHistory')
   private chatHistory!: ElementRef;
+
+  private chatService = inject(ChatService);
 
   userInput = '';
 
   isLoading = false;
+
+  local = false;
 
   messages = signal([{ text: 'Olá! Como posso te ajudar hoje?', isBot: true }]);
 
@@ -38,13 +42,33 @@ export class ChatBot {
     if (this.userInput !== '' && !this.isLoading) {
       this.updateMessages(this.userInput);
       this.isLoading = true;
-      this.userInput = '';
-      this.simulateResponse();
+      if (this.local) {
+        this.simulateResponse();
+      } else {
+        this.sendChatMessage();
+      }
     }
   }
 
+  private sendChatMessage() {
+    this.chatService
+      .sendChatMessage(this.userInput)
+      .pipe(
+        catchError(() => {
+          this.updateMessages('Desculpe, não consigo processar seu pedido no momento.', true);
+          this.isLoading = false;
+          return throwError(() => new Error('Erro ocorreu ao mandar a mensagem.'));
+        }),
+      )
+      .subscribe((response) => {
+        this.updateMessages(response.message, true);
+        this.userInput = '';
+        this.isLoading = false;
+      });
+  }
+
   private updateMessages(text: string, isBot = false) {
-    this.messages.update((messages) => [...messages, { text: text, isBot: isBot }]);
+    this.messages.update((messages) => [...messages, { text, isBot }]);
     this.scrollToBottom();
   }
 
@@ -56,6 +80,7 @@ export class ChatBot {
     setTimeout(() => {
       const response = 'Esta é uma resposta simulada do bot.';
       this.updateMessages(response, true);
+      this.userInput = '';
       this.isLoading = false;
     }, 2000);
   }
