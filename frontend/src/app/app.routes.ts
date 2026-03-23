@@ -10,4 +10,5 @@ export const routes: Routes = [
   { path: 'produtos', component: Produtos },
   { path: 'clientes', component: Clientes },
   {path: 'vendas', component: Vendas },
+  {path: 'chat-bot', loadComponent: () => import('./ia/chat-bot/chat-bot').then(c => c.ChatBot) },
 ];
