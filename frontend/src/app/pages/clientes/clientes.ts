@@ -2,10 +2,11 @@ import { inject } from '@angular/core';
 import { Component } from '@angular/core';
 import { ClientsService } from '../../services/clients-service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-clientes',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './clientes.html',
   styleUrl: './clientes.css',
 })
