@@ -1,22 +1,19 @@
-/* Container principal do formulário (Efeito de Cartão) */
 .form-container {
-  max-width: 100%; /* Não deixa o formulário esticar na tela toda */
-  margin: 40px auto; /* Centraliza na tela */
+  max-width: 100%;
+  margin: 40px auto;
   padding: 30px;
   background-color: #ffffff;
-  border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave profissional */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Espaçamento entre cada campo */
 .form-group {
   margin-bottom: 20px;
   display: flex;
-  flex-direction: column; /* Coloca o label em cima e o input embaixo */
+  flex-direction: column;
 }
 
-/* Estilo das etiquetas (Labels) */
 .form-group label {
   margin-bottom: 8px;
   font-weight: 600;
@@ -24,34 +21,30 @@
   font-size: 0.95rem;
 }
 
-/* Estilo dos inputs de texto e número */
 .form-group input[type='text'],
 .form-group input[type='number'] {
   padding: 12px;
   border: 1px solid #cccccc;
   border-radius: 6px;
   font-size: 1rem;
-  transition: border-color 0.3s ease; /* Animação suave na borda */
+  transition: border-color 0.3s ease;
   width: 100%;
-  box-sizing: border-box; /* Garante que o padding não quebre a largura */
+  box-sizing: border-box;
 }
 
-/* Efeito quando o usuário clica no input (Focus) */
 .form-group input[type='text']:focus,
 .form-group input[type='number']:focus {
-  border-color: #0056b3; /* Cor azul de destaque */
-  outline: none; /* Remove aquela borda preta padrão feia do navegador */
+  border-color: #0056b3;
+  outline: none;
   box-shadow: 0 0 5px rgba(0, 86, 179, 0.2);
 }
 
-/* Efeito para inputs bloqueados (A nossa dívida desabilitada) */
 .form-group input:disabled {
   background-color: #f5f5f5;
   cursor: not-allowed;
   color: #888888;
 }
 
-/* Organizando o Checkbox para ficar bonito */
 .checkbox-group .checkbox-label {
   display: flex;
   align-items: center;
@@ -67,16 +60,14 @@
   cursor: pointer;
 }
 
-/* Área do Botão */
 .form-actions {
   margin-top: 30px;
   display: flex;
-  justify-content: flex-end; /* Joga o botão para a direita */
+  justify-content: flex-end;
 }
 
-/* O Botão de Salvar */
 .btn-submit {
-  background-color: #007bff; /* Azul vibrante */
+  background-color: #007bff;
   color: white;
   padding: 12px 24px;
   border: none;
@@ -89,19 +80,44 @@
     transform 0.1s ease;
 }
 
-/* Efeito ao passar o mouse no botão */
 .btn-submit:hover:not(:disabled) {
-  background-color: #0056b3; /* Azul mais escuro */
+  background-color: #0056b3;
 }
 
-/* Efeito ao clicar no botão */
 .btn-submit:active:not(:disabled) {
-  transform: scale(0.98); /* Dá uma leve encolhida, efeito de clique real */
+  transform: scale(0.98);
 }
 
-/* O MESTRE: Estilo do botão quando o formulário está inválido */
 .btn-submit:disabled {
-  background-color: #cccccc; /* Cinza */
+  background-color: #cccccc;
   color: #666666;
   cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.form-group input.input-error {
+  border-color: #dc3545;
+  background-color: #fff8f8;
+}
+
+.form-group input.input-error:focus {
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

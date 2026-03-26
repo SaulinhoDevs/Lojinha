@@ -65,9 +65,15 @@ export class ClienteForm implements OnInit {
       },
       error: (erro) => {
         console.error('Erro ao salvar:', erro);
-        alert('Ops! Deu ruim ao tentar salvar no banco de dados. Verifique se o Spring Boot está rodando.');
-      }
+        alert(
+          'Ops! Deu ruim ao tentar salvar no banco de dados. Verifique se o Spring Boot está rodando.',
+        );
+      },
     });
   }
 
+  isCampoInvalido(nomeDoCampo: string): boolean {
+    const campo = this.formulario.get(nomeDoCampo);
+    return !!(campo && campo.invalid && (campo.touched || campo.dirty));
+  }
 }

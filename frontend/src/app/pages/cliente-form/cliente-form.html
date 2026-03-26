@@ -2,7 +2,11 @@
 
   <div class="form-group">
     <label>Nome Completo *</label>
-    <input type="text" formControlName="nome" placeholder="Digite seu nome completo">
+    <input type="text" formControlName="nome" placeholder="Digite seu nome completo"
+      [class.input-error]="isCampoInvalido('nome')">
+    @if (isCampoInvalido('nome')) {
+    <span class="error-message">O nome é obrigatório.</span>
+    }
   </div>
 
   <div class="form-group checkbox-group">
@@ -20,17 +24,31 @@
 
   <div class="form-group">
     <label>Rua *</label>
-    <input type="text" formControlName="rua">
+    <input type="text" formControlName="rua" placeholder="Ex: Rua das Flores"
+      [class.input-error]="isCampoInvalido('rua')">
+
+    @if (isCampoInvalido('rua')) {
+    <span class="error-message">Informe o nome da rua.</span>
+    }
   </div>
 
   <div class="form-group">
     <label>Bairro *</label>
-    <input type="text" formControlName="bairro">
+    <input type="text" formControlName="bairro" placeholder="Ex: Centro"
+      [class.input-error]="isCampoInvalido('bairro')">
+
+    @if (isCampoInvalido('bairro')) {
+    <span class="error-message">Informe o nome do bairro.</span>
+    }
   </div>
 
   <div class="form-group">
     <label>Número *</label>
-    <input type="number" formControlName="numero">
+    <input type="number" formControlName="numero" placeholder="Ex: 123" [class.input-error]="isCampoInvalido('numero')">
+
+    @if (isCampoInvalido('numero')) {
+    <span class="error-message">Informe o número da casa.</span>
+    }
   </div>
 
   <div class="form-actions">
