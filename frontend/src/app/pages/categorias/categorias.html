@@ -1,0 +1,26 @@
+<div class="categorias-container">
+  <div class="header">
+    <button class="btn add-categoria" routerLink="/categoria-form">Nova Categoria</button>
+  </div>
+
+  <div class="categorias-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categoria of categorias">
+          <td>{{ categoria.nome }}</td>
+          <td class="actions">
+            <button class="btn details">Detalhes</button>
+            <button class="btn edit">Editar</button>
+            <button class="btn delete">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

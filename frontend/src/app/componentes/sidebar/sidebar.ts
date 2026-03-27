@@ -13,6 +13,7 @@ export class Sidebar {
   menuItems = [
     { label: 'Início', route: '/inicio' },
     { label: 'Produtos', route: '/produtos' },
+    { label: 'Categorias', route: '/categorias' },
     { label: 'Vendas', route: '/vendas' },
     { label: 'Clientes', route: '/clientes' },
   ];
