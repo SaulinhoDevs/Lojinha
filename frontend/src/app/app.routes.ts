@@ -6,6 +6,7 @@ import { Routes } from '@angular/router';
 import { ClienteForm } from './pages/cliente-form/cliente-form';
 import { Categorias } from './pages/categorias/categorias';
 import { CategoriaForm } from './pages/categoria-form/categoria-form';
+import { ProdutoForm } from './pages/produto-form/produto-form';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   {path: 'chat-bot', loadComponent: () => import('./ia/chat-bot/chat-bot').then(c => c.ChatBot) },
   {path: 'cliente-form', component: ClienteForm},
   {path: 'categorias', component: Categorias},
-  {path: 'categoria-form', component: CategoriaForm }
+  {path: 'categoria-form', component: CategoriaForm },
+  {path: 'produto-form', component: ProdutoForm },
 ];

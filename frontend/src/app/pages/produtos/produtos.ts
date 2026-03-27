@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ProductsService } from '../../services/products-service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-produtos',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './produtos.html',
   styleUrl: './produtos.css',
 })

@@ -62,6 +62,7 @@ public class TestConfig implements CommandLineRunner {
         p3.getCategorias().add(cat4);
         p4.getCategorias().add(cat3);
         p5.getCategorias().add(cat1);
+        p5.getCategorias().add(cat2);
 
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 

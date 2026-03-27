@@ -1,0 +1,66 @@
+<form [formGroup]="formulario" (ngSubmit)="salvar()" class="form-container">
+
+  <div class="form-group">
+    <label>Nome do Produto *</label>
+    <input type="text" formControlName="nome" [class.input-error]="isCampoInvalido('nome')">
+
+    @if (isCampoInvalido('nome')) {
+    <span class="error-message">O nome é obrigatório.</span>
+    }
+  </div>
+
+  <div class="form-group">
+    <label>Categorias *</label>
+
+    <div class="checkbox-list-container" [class.list-error]="isCampoInvalido('categoriasIds')">
+      @for (cat of listaDeCategorias; track cat.id) {
+      <label class="checkbox-item">
+        <input type="checkbox" [value]="cat.id" (change)="onCategoriaChange($event, cat.id)">
+        {{ cat.nome }}
+      </label>
+      }
+    </div>
+
+    @if (isCampoInvalido('categoriasIds')) {
+    <span class="error-message">Selecione pelo menos uma categoria.</span>
+    }
+  </div>
+
+  <div class="form-row">
+
+    <div class="form-group flex-1">
+      <label>Estoque *</label>
+      <input type="number" formControlName="estoque" [class.input-error]="isCampoInvalido('estoque')">
+
+      @if (isCampoInvalido('estoque')) {
+      <span class="error-message">Informe o estoque.</span>
+      }
+    </div>
+
+    <div class="form-group flex-1">
+      <label>Preço de Compra *</label>
+      <input type="number" step="0.01" formControlName="precoCompra" placeholder="R$ 0,00"
+        [class.input-error]="isCampoInvalido('precoCompra')">
+
+      @if (isCampoInvalido('precoCompra')) {
+      <span class="error-message">Preço inválido.</span>
+      }
+    </div>
+
+    <div class="form-group flex-1">
+      <label>Preço de Venda *</label>
+      <input type="number" step="0.01" formControlName="precoVenda" placeholder="R$ 0,00"
+        [class.input-error]="isCampoInvalido('precoVenda')">
+
+      @if (isCampoInvalido('precoVenda')) {
+      <span class="error-message">Preço inválido.</span>
+      }
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn-submit" [disabled]="formulario.invalid">Salvar Produto</button>
+  </div>
+
+</form>
