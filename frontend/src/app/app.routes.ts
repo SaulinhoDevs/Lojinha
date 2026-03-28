@@ -7,9 +7,12 @@ import { ClienteForm } from './pages/cliente-form/cliente-form';
 import { Categorias } from './pages/categorias/categorias';
 import { CategoriaForm } from './pages/categoria-form/categoria-form';
 import { ProdutoForm } from './pages/produto-form/produto-form';
+import { Login } from './pages/login/login';
+
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: Login },
   { path: 'inicio', component: Inicio },
   { path: 'produtos', component: Produtos },
   { path: 'clientes', component: Clientes },

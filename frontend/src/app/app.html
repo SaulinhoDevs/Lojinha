@@ -1,28 +1,24 @@
-<div class="app-login">
-    
-</div>
-
 <div class="app-container">
-    <!-- Sidebar Overlay (Mobile) -->
-    @if (isSidebarOpen()) {
-    <div (click)="toggleSidebar()" (keydown.enter)="toggleSidebar()" class="sidebar-overlay" role="button" tabindex="0">
+  <!-- Sidebar Overlay (Mobile) -->
+  @if (isSidebarOpen()) {
+    <div (click)="toggleSidebar()" (keydown.enter)="toggleSidebar()" 
+         class="sidebar-overlay" role="button" tabindex="0">
     </div>
-    }
+  }
 
-    <!-- Sidebar -->
-    <app-sidebar [class.open]="isSidebarOpen()" class="app-sidebar"></app-sidebar>
+  <!-- Sidebar -->
+  <app-sidebar [class.open]="isSidebarOpen()" class="app-sidebar"></app-sidebar>
 
-    <!-- Main Content Area -->
-    <div class="main-content">
-        <app-header (click)="isSidebarOpen() && toggleSidebar()"></app-header>
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <app-header (click)="isSidebarOpen() && toggleSidebar()"></app-header>
 
-        <!-- Mobile Toggle Button -->
-        <button (click)="toggleSidebar()" class="mobile-toggle" aria-label="Toggle Menu">
-            <span class="toggle-text">{{ isSidebarOpen() ? 'Fechar' : 'Menu' }}</span>
-        </button>
+    <button (click)="toggleSidebar()" class="mobile-toggle" aria-label="Toggle Menu">
+      <span class="toggle-text">{{ isSidebarOpen() ? 'Fechar' : 'Menu' }}</span>
+    </button>
 
-        <main class="content-area">
-            <router-outlet></router-outlet>
-        </main>
-    </div>
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>
