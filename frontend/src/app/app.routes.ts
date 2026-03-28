@@ -24,4 +24,5 @@ export const routes: Routes = [
   {path: 'categorias', component: Categorias},
   {path: 'categoria-form', component: CategoriaForm },
   {path: 'produto-form', component: ProdutoForm },
+  {path: 'cliente-details/:id', component: ClienteForm },
 ];
