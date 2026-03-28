@@ -8,11 +8,13 @@ import { Categorias } from './pages/categorias/categorias';
 import { CategoriaForm } from './pages/categoria-form/categoria-form';
 import { ProdutoForm } from './pages/produto-form/produto-form';
 import { Login } from './pages/login/login';
+import { Cadastro } from './pages/cadastro/cadastro';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: Login },
+  { path: 'cadastro', component: Cadastro },
   { path: 'inicio', component: Inicio },
   { path: 'produtos', component: Produtos },
   { path: 'clientes', component: Clientes },
