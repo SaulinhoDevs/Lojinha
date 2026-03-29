@@ -1,0 +1,59 @@
+<div class="details-container">
+  <div class="details-card">
+
+    <div *ngIf="carregando" class="status-box loading">
+      <p>Carregando dados do produto...</p>
+    </div>
+
+    <div *ngIf="!carregando && erro" class="status-box error">
+      <h2>Ops!</h2>
+      <p>{{ erro }}</p>
+
+      <a routerLink="/produtos" class="btn-voltar">
+        Voltar para a listagem
+      </a>
+    </div>
+
+    <div *ngIf="!carregando && produto" class="produto-content">
+      <div class="header">
+        <h1>Detalhes do Produto</h1>
+        <a routerLink="/produtos" class="btn-voltar">Voltar</a>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Nome</span>
+          <span class="value">{{ produto.nome }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Estoque</span>
+          <span class="value">{{ produto.estoque }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Preço de Venda</span>
+          <span class="value">{{ produto.precoVenda | currency:'BRL' }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Preço de Compra</span>
+          <span class="value">{{ produto.precoCompra | currency:'BRL' }}</span>
+        </div>
+
+        <div class="info-item full-width">
+          <span class="label">Categoria (as)</span>
+          <span class="value">
+            @for (categoria of produto.categorias; track categoria.id) {
+            {{ categoria.nome }}
+            @if (!$last) {, }
+            } @empty {
+            Nenhuma categoria cadastrada
+            }
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

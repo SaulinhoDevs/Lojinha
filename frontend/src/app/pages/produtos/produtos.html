@@ -23,7 +23,7 @@
           <td>R$ {{ produto.precoCompra | number:'1.2-2' }}</td>
           <td>R$ {{ produto.precoVenda | number:'1.2-2' }}</td>
           <td class="actions">
-            <button class="btn details">Detalhes</button>
+            <button class="btn details" [routerLink]="['/produtos', produto.id]">Detalhes</button>
           </td>
           <td class="actions">
             <button class="btn edit">Editar</button>

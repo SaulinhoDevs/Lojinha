@@ -1,4 +1,3 @@
-import { Produtos } from './../pages/produtos/produtos';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Produto } from './interfaces/produto.model';
@@ -29,4 +28,8 @@ export class ProductsService {
 
     return this.http.post<Produto>(`${ProductsService.BASE_PATH}/produtos`, produtoParaSalvar);
   }
+
+  buscarPorId(id: number): Observable<Produto> {
+      return this.http.get<Produto>(`${ProductsService.BASE_PATH}/produtos/${id}`);
+    }
 }

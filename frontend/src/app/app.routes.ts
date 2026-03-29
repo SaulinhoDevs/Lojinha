@@ -12,6 +12,7 @@ import { Cadastro } from './pages/cadastro/cadastro';
 import { AuthLayout } from './componentes/layouts/auth-layout/auth-layout';
 import { MainLayout } from './componentes/layouts/main-layout/main-layout';
 import { ClienteDetails } from './pages/cliente-details/cliente-details';
+import { ProdutoDetails } from './pages/produto-details/produto-details';
 
 // app.routes.ts
 export const routes: Routes = [
@@ -39,6 +40,7 @@ export const routes: Routes = [
       {path: 'categoria-form', component: CategoriaForm },
       {path: 'produto-form', component: ProdutoForm },
       {path: 'clientes/:id', component: ClienteDetails },
+      {path: 'produtos/:id', component: ProdutoDetails },
     ]
   },
 
