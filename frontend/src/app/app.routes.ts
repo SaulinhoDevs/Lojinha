@@ -13,35 +13,41 @@ import { AuthLayout } from './componentes/layouts/auth-layout/auth-layout';
 import { MainLayout } from './componentes/layouts/main-layout/main-layout';
 import { ClienteDetails } from './pages/cliente-details/cliente-details';
 import { ProdutoDetails } from './pages/produto-details/produto-details';
+import { CategoriaDetails } from './pages/categoria-details/categoria-details';
 
 // app.routes.ts
 export const routes: Routes = [
-
   // Rotas SEM header e sidebar (login, cadastro)
-  { path: '',
+  {
+    path: '',
     component: AuthLayout,
     children: [
       { path: 'login', component: Login },
       { path: 'cadastro', component: Cadastro },
-    ]
+    ],
   },
 
   // Rotas COM header e sidebar
-  {path: '',
+  {
+    path: '',
     component: MainLayout,
     children: [
       { path: 'inicio', component: Inicio },
       { path: 'produtos', component: Produtos },
       { path: 'clientes', component: Clientes },
       { path: 'vendas', component: Vendas },
-      { path: 'chat-bot', loadComponent: () => import('./ia/chat-bot/chat-bot').then(c => c.ChatBot) },
+      {
+        path: 'chat-bot',
+        loadComponent: () => import('./ia/chat-bot/chat-bot').then((c) => c.ChatBot),
+      },
       { path: 'cliente-form', component: ClienteForm },
-      { path: 'categorias', component: Categorias   },
-      {path: 'categoria-form', component: CategoriaForm },
-      {path: 'produto-form', component: ProdutoForm },
-      {path: 'clientes/:id', component: ClienteDetails },
-      {path: 'produtos/:id', component: ProdutoDetails },
-    ]
+      { path: 'categorias', component: Categorias },
+      { path: 'categoria-form', component: CategoriaForm },
+      { path: 'produto-form', component: ProdutoForm },
+      { path: 'clientes/:id', component: ClienteDetails },
+      { path: 'produtos/:id', component: ProdutoDetails },
+      { path: 'categorias/:id', component: CategoriaDetails },
+    ],
   },
 
   // Redireciona a raiz para o login

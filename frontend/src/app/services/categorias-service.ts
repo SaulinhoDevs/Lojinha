@@ -24,4 +24,8 @@ export class CategoriasService {
       categoriaParaSalvar,
     );
   }
+
+  buscarPorId(id: number): Observable<Categoria> {
+      return this.http.get<Categoria>(`${CategoriasService.BASE_PATH}/categorias/${id}`);
+    }
 }
