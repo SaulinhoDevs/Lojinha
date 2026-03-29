@@ -1,1 +1,47 @@
-<p>cliente-details works!</p>
+<div class="details-container">
+  <div class="details-card">
+
+    <div *ngIf="carregando" class="status-box loading">
+      <p>Carregando dados do cliente...</p>
+    </div>
+
+    <div *ngIf="!carregando && erro" class="status-box error">
+      <h2>Ops!</h2>
+      <p>{{ erro }}</p>
+
+      <a routerLink="/clientes" class="btn-voltar">
+        Voltar para a listagem
+      </a>
+    </div>
+
+    <div *ngIf="!carregando && cliente" class="cliente-content">
+      <div class="header">
+        <h1>Detalhes do Cliente</h1>
+        <a routerLink="/clientes" class="btn-voltar">Voltar</a>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Nome</span>
+          <span class="value">{{ cliente.nome }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Dívida</span>
+          <span class="value">{{ cliente.divida | currency:'BRL' }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Telefone</span>
+          <span class="value">{{ cliente.telefone }}</span>
+        </div>
+
+        <div class="info-item full-width">
+          <span class="label">Endereço</span>
+          <span class="value">{{ cliente.rua }}, {{ cliente.numero }} - {{ cliente.bairro }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

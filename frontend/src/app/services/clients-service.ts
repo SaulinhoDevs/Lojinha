@@ -30,4 +30,9 @@ export class ClientsService {
 
     return this.http.post<Cliente>(`${ClientsService.BASE_PATH}/clientes`, clienteParaSalvar);
   }
+
+  buscarPorId(id: number): Observable<Cliente> {
+    return this.http.get<Cliente>(`${ClientsService.BASE_PATH}/clientes/${id}`);
+  }
+
 }

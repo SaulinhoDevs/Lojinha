@@ -11,6 +11,7 @@ import { Login } from './pages/login/login';
 import { Cadastro } from './pages/cadastro/cadastro';
 import { AuthLayout } from './componentes/layouts/auth-layout/auth-layout';
 import { MainLayout } from './componentes/layouts/main-layout/main-layout';
+import { ClienteDetails } from './pages/cliente-details/cliente-details';
 
 // app.routes.ts
 export const routes: Routes = [
@@ -37,7 +38,7 @@ export const routes: Routes = [
       { path: 'categorias', component: Categorias   },
       {path: 'categoria-form', component: CategoriaForm },
       {path: 'produto-form', component: ProdutoForm },
-      {path: 'cliente-details/:id', component: ClienteForm },
+      {path: 'clientes/:id', component: ClienteDetails },
     ]
   },
 

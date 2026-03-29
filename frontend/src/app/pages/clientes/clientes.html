@@ -21,7 +21,7 @@
           <td>{{cliente.telefone}}</td>
           <td class="dívida">R$ {{cliente.divida | number:'1.2-2' }}</td>
           <td class="actions">
-            <button class="btn details" routerLink="/src/app/pages/cliente-details">Detalhes</button>
+            <button class="btn details" [routerLink]="['/clientes', cliente.id]">Detalhes</button>
             <button class="btn edit">Editar</button>
             <button class="btn delete">Excluir</button>
           </td>
