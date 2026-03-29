@@ -2,7 +2,7 @@
 .produtos-container {
   padding: 20px;
   background-color: #f4f6f8;
-  min-height: 100vh;
+  height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
@@ -11,13 +11,12 @@
 }
 
 .header {
-  display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
 .btn {
-  padding: 12px 18px;
+  padding: 12px;
   border: none;
   border-radius: 6px;
   font-weight: 600;
@@ -43,7 +42,6 @@
   width: 100%;
   border-collapse: separate;
   border-radius: 15px;
-  overflow: hidden;
 }
 
 .produto-table th, .produto-table td {
@@ -63,22 +61,14 @@
 .produto-table td {
   background-color: #fff;
   color: #555;
-  border-bottom: 1px solid #ddd;
   font-size: 14px;
 }
 
-.produto-table td:first-child {
-  border-left: 1px solid #ddd;
-}
+td .actions 
 
-.produto-table td:last-child {
-  border-right: 1px solid #ddd;
-}
-
-/* Botões na tabela */
 .actions {
   display: flex;
-  gap: 8px;
+  column-gap: 8px;
   justify-content: center;
 }
 
@@ -115,7 +105,7 @@
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 980px) {
   .produtos-container {
     padding: 15px; /* Diminui o padding nas telas menores */
   }
@@ -135,7 +125,7 @@
   }
 
   .produto-table td {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .actions {

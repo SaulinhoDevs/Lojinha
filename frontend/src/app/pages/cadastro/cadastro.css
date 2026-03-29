@@ -15,21 +15,21 @@
             align-items: center;
         }
 
-        .login-card {
+        .cadastro-card {
             border: none;
             border-radius: 1.25rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
-        .login-card-header {
+        .cadastro-card-header {
             font-family: 'Nunito', sans-serif;
             font-weight: 900;
             font-size: 2.5rem;
             color: var(--primary-color);
         }
 
-        .login-card-subheader {
+        .cadastro-card-subheader {
             font-size: 1rem;
             color: var(--text-color);
             margin-bottom: 2rem;
@@ -47,7 +47,7 @@
             box-shadow: 0 0 0 0.25rem rgba(37, 117, 252, 0.25);
         }
 
-        .btn-login {
+        .btn-cadastro {
             background-color: #6a11cb;
             border-radius: 0.75rem;
             padding: 0.8rem;
@@ -57,8 +57,8 @@
             box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
         }
 
-        .btn-login:hover {
-            background-color: var(--secondary-color);
+        .btn-cadastro:hover {
+            background-color: #2575fc;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 117, 252, 0.4);
         }
@@ -70,17 +70,18 @@
         }
 
         .signup-link:hover {
+            cursor: pointer;
             text-decoration: underline;
         }
 
-        .login-image-section {
+        .cadastro-image-section {
             background-image: url('https://placehold.co/800x1200/6a11cb/FFFFFF?text=Lojinha&font=nunito');
             background-size: cover;
             background-position: center;
         }
 
         @media (min-width: 768px) {
-            .login-card-header {
+            .cadastro-card-header {
                 font-size: 3rem;
             }
         }

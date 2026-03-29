@@ -1,0 +1,34 @@
+/* Container principal ocupa toda a tela */
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar fixo à esquerda */
+.app-sidebar {
+  width: 280px;
+  height: 100vh;
+  flex-shrink: 0; /* não encolhe */
+  overflow-y: auto;
+}
+
+/* Área direita: header em cima + conteúdo embaixo */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Header fixo no topo da área direita */
+app-header {
+  flex-shrink: 0;
+}
+
+/* Conteúdo das páginas com scroll */
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}

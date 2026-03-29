@@ -1,0 +1,24 @@
+<div class="app-container">
+  <!-- Sidebar Overlay (Mobile) -->
+  @if (isSidebarOpen()) {
+    <div (click)="toggleSidebar()" (keydown.enter)="toggleSidebar()" 
+         class="sidebar-overlay" role="button" tabindex="0">
+    </div>
+  }
+
+  <!-- Sidebar -->
+  <app-sidebar [class.open]="isSidebarOpen()" class="app-sidebar"></app-sidebar>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <app-header (click)="isSidebarOpen() && toggleSidebar()"></app-header>
+
+    <button (click)="toggleSidebar()" class="mobile-toggle" aria-label="Toggle Menu">
+      <span class="toggle-text">{{ isSidebarOpen() ? 'Fechar' : 'Menu' }}</span>
+    </button>
+
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

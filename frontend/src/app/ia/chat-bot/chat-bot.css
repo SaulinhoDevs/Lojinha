@@ -59,3 +59,9 @@
 .full-width {
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .chat-container {
+    height: 80vh;
+  }
+}
