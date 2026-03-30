@@ -131,6 +131,7 @@
             color: #fff;
             padding: 4px 12px;
             border-radius: 6px;
+            
         }
         .subheader-flip li:nth-child(2) span { background: #22c55e; } /* Verde */
         .subheader-flip li:nth-child(3) span { background: #3b82f6; } /* Azul */
@@ -216,3 +217,15 @@
             0%, 100% { transform: scale(0); opacity: 0; }
             50% { transform: scale(1); opacity: 1; }
         }
+
+    @media (max-width: 998px) { 
+        .subheader-container {
+            height: 70px;
+        }
+    }
+
+        @media (max-width: 768px) { 
+        .subheader-container {
+            height: 45px;
+        }
+    }
