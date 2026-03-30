@@ -13,7 +13,6 @@ export class Cadastro {
   nome = '';
   email = '';
   senha = '';
-  confirmarSenha = '';
   tipo = '';
   erro = '';
   sucesso = '';
@@ -24,13 +23,8 @@ constructor(private router: Router) {}
     this.erro = '';
     this.sucesso = '';
 
-    if (!this.nome || !this.email || !this.senha || !this.confirmarSenha) {
+    if (!this.nome || !this.email || !this.senha || !this.tipo) {
       this.erro = 'Preencha todos os campos.';
-      return;
-    }
-
-    if (this.senha !== this.confirmarSenha) {
-      this.erro = 'As senhas não coincidem.';
       return;
     }
 

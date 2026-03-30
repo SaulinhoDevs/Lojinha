@@ -38,9 +38,6 @@
                                             <div>Pronto para novos <span>Produtos</span>?</div>
                                         </li>
                                         <li>
-                                            <div>Pronto para novas <span>Conquistas</span>?</div>
-                                        </li>
-                                        <li>
                                             <div>Pronto para novas <span>Descobertas</span>?</div>
                                         </li>
                                         <li>
@@ -62,29 +59,23 @@
                                 <label for="nome" class="form-label">Nome</label>
                                 <input type="text" class="form-control" id="nome"
                                         placeholder="Seu nome completo"
-                                        [(ngModel)]="nome" required />
+                                />
                                 </div>
                                 <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email"
                                         placeholder="seuemail@exemplo.com"
-                                        [(ngModel)]="email" required />
+                                />
                                 </div>
                                 <div class="mb-3">
                                 <label for="password" class="form-label">Senha</label>
                                 <input type="password" class="form-control" id="password"
                                         placeholder="Crie uma senha forte"
-                                        [(ngModel)]="senha" required />
-                                </div>
-                                <div class="mb-3">
-                                <label for="confirmPassword" class="form-label">Confirmar Senha</label>
-                                <input type="password" class="form-control" id="confirmPassword"
-                                        placeholder="Confirme sua senha"
-                                        [(ngModel)]="confirmarSenha" required />
+                                />
                                 </div>
                                 <div class="mb-4">
-                                    <label for="confirmPassword" class="form-label">Confirmar Senha</label>
-                                    <select id="tipo" class="form-select" [(ngModel)]="tipo" required>
+                                    <label for="tipo" class="form-label">Tipo</label>
+                                    <select id="tipo" class="form-select">
                                     <option value="" disabled>Selecione o tipo</option>
                                     <option value="CNPJ">CNPJ</option>
                                     <option value="CPF">CPF</option>
