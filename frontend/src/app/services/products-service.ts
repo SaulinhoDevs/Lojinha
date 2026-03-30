@@ -13,6 +13,10 @@ export class ProductsService {
     return this.http.get(`${ProductsService.BASE_PATH}/produtos`);
   }
 
+  buscarPorId(id: number): Observable<Produto> {
+    return this.http.get<Produto>(`${ProductsService.BASE_PATH}/produtos/${id}`);
+  }
+
   saveProduto(dadosBrutos: any): Observable<Produto> {
     const categoriasMapeadas = dadosBrutos.categoriasIds.map((idDaTela: number) => {
       return { id: Number(idDaTela) };
@@ -29,7 +33,23 @@ export class ProductsService {
     return this.http.post<Produto>(`${ProductsService.BASE_PATH}/produtos`, produtoParaSalvar);
   }
 
-  buscarPorId(id: number): Observable<Produto> {
-      return this.http.get<Produto>(`${ProductsService.BASE_PATH}/produtos/${id}`);
-    }
+  updateProduto(id: number, dadosBrutos: any): Observable<Produto> {
+    const categoriasMapeadas = dadosBrutos.categoriasIds.map((idDaTela: number) => {
+      return { id: Number(idDaTela) };
+    });
+
+    const produtoParaAtualizar: Produto = {
+      id: id,
+      nome: dadosBrutos.nome,
+      estoque: dadosBrutos.estoque,
+      precoVenda: dadosBrutos.precoVenda,
+      precoCompra: dadosBrutos.precoCompra,
+      categorias: categoriasMapeadas,
+    };
+
+    return this.http.put<Produto>(
+      `${ProductsService.BASE_PATH}/produtos/${id}`,
+      produtoParaAtualizar,
+    );
+  }
 }

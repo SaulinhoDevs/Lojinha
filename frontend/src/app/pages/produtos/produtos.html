@@ -23,7 +23,7 @@
           <td data-label="Preço de Venda">R$ {{ produto.precoVenda | number:'1.2-2' }}</td>
           <td data-label="Ações" class="actions">
             <button class="btn details" [routerLink]="['/produtos', produto.id]">Detalhes</button>
-            <button class="btn edit">Editar</button>
+            <button class="btn edit" [routerLink]="['/produtos', produto.id, 'editar']">Editar</button>
             <button class="btn delete">Excluir</button>
           </td>
         </tr>

@@ -15,7 +15,8 @@
     <div class="checkbox-list-container" [class.list-error]="isCampoInvalido('categoriasIds')">
       @for (cat of listaDeCategorias; track cat.id) {
       <label class="checkbox-item">
-        <input type="checkbox" [value]="cat.id" (change)="onCategoriaChange($event, cat.id)">
+        <input type="checkbox" [value]="cat.id" [checked]="isCategoriaSelecionada(cat.id)"
+          (change)="onCategoriaChange($event, cat.id)">
         {{ cat.nome }}
       </label>
       }
@@ -60,7 +61,9 @@
   </div>
 
   <div class="form-actions">
-    <button type="submit" class="btn-submit" [disabled]="formulario.invalid">Salvar Produto</button>
+    <button type="submit" class="btn-submit" [disabled]="formulario.invalid">
+      {{ modoEdicao ? 'Atualizar Produto' : 'Salvar Produto' }}
+    </button>
   </div>
 
 </form>

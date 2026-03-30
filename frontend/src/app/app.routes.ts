@@ -18,7 +18,7 @@ import { CategoriaDetails } from './pages/categoria-details/categoria-details';
 export const routes: Routes = [
   // Redireciona a raiz para o login
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  
+
   // Rotas SEM header e sidebar (login, cadastro)
   {
     path: '',
@@ -49,6 +49,7 @@ export const routes: Routes = [
       { path: 'clientes/:id', component: ClienteDetails },
       { path: 'produtos/:id', component: ProdutoDetails },
       { path: 'categorias/:id', component: CategoriaDetails },
+      { path: 'produtos/:id/editar', component: ProdutoForm },
     ],
   },
 ];

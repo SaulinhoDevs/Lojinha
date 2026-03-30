@@ -54,6 +54,8 @@ public class ProdutoService {
         produto.setEstoque(obj.getEstoque());
         produto.setPrecoVenda(obj.getPrecoVenda());
         produto.setPrecoCompra(obj.getPrecoCompra());
+        produto.getCategorias().clear();
+        produto.getCategorias().addAll(obj.getCategorias());
     }
 
 }
