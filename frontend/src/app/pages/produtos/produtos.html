@@ -1,10 +1,8 @@
 <div class="produtos-container">
-  <!-- Botão para adicionar novo produto, centralizado -->
   <div class="header">
     <button class="btn add-product" routerLink="/produto-form">Novo Produto</button>
   </div>
 
-  <!-- Tabela de produtos -->
   <div class="produto-table">
     <table>
       <thead>
@@ -13,22 +11,19 @@
           <th>Estoque</th>
           <th>Preço de Compra</th>
           <th>Preço de Venda</th>
-          <th></th> <!-- Removido o título "Ações" -->
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let produto of produtos">
-          <td>{{ produto.nome }}</td>
-          <td>{{ produto.estoque }}</td>
-          <td>R$ {{ produto.precoCompra | number:'1.2-2' }}</td>
-          <td>R$ {{ produto.precoVenda | number:'1.2-2' }}</td>
-          <td class="actions">
+          <!-- 👇 data-label faz o nome da coluna aparecer no mobile -->
+          <td data-label="Nome">{{ produto.nome }}</td>
+          <td data-label="Estoque">{{ produto.estoque }}</td>
+          <td data-label="Preço de Compra">R$ {{ produto.precoCompra | number:'1.2-2' }}</td>
+          <td data-label="Preço de Venda">R$ {{ produto.precoVenda | number:'1.2-2' }}</td>
+          <td data-label="Ações" class="actions">
             <button class="btn details" [routerLink]="['/produtos', produto.id]">Detalhes</button>
-          </td>
-          <td class="actions">
             <button class="btn edit">Editar</button>
-          </td>
-          <td class="actions">
             <button class="btn delete">Excluir</button>
           </td>
         </tr>
