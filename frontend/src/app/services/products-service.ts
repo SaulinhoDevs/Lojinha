@@ -52,4 +52,8 @@ export class ProductsService {
       produtoParaAtualizar,
     );
   }
+
+  deleteProduto(id: number): Observable<void> {
+    return this.http.delete<void>(`${ProductsService.BASE_PATH}/produtos/${id}`);
+  }
 }

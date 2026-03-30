@@ -19,12 +19,12 @@
           <!-- 👇 data-label faz o nome da coluna aparecer no mobile -->
           <td data-label="Nome">{{ produto.nome }}</td>
           <td data-label="Estoque" class="center">{{ produto.estoque }}</td>
-          <td data-label="Preço de Compra"class="center">R$ {{ produto.precoCompra | number:'1.2-2' }}</td>
+          <td data-label="Preço de Compra" class="center">R$ {{ produto.precoCompra | number:'1.2-2' }}</td>
           <td data-label="Preço de Venda" class="center">R$ {{ produto.precoVenda | number:'1.2-2' }}</td>
           <td data-label="Ações" class="actions">
             <button class="btn details" [routerLink]="['/produtos', produto.id]">Detalhes</button>
             <button class="btn edit" [routerLink]="['/produtos', produto.id, 'editar']">Editar</button>
-            <button class="btn delete">Excluir</button>
+            <button class="btn delete" (click)="excluir(produto.id, produto.nome)">Excluir</button>
           </td>
         </tr>
       </tbody>
