@@ -1,17 +1,66 @@
-<div class="content-wrapper">
-    <div class="hero-card">
-        <h2 class="hero-title">Lojinha</h2>
-        <p class="hero-subtitle">O seu assistente virtual</p>
+<div class="inicio-wrapper">
 
-        <div class="info-grid">
-            <div class="info-card welcome">
-                <h3 class="info-title">Bem-vindo de volta!</h3>
-                <p class="info-text">Gerencie seus produtos e vendas de forma simples e rápida.</p>
-            </div>
-            <div class="info-card status">
-                <h3 class="info-title">Status do Sistema</h3>
-                <p class="info-text">Tudo funcionando perfeitamente. 12 novas vendas hoje.</p>
-            </div>
-        </div>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">Sistema de Gestão</div>
+    <h1 class="hero-title">Lojinha</h1>
+    <p class="hero-subtitle">Gerencie seus produtos, vendas e clientes em um só lugar</p>
+  </div>
+
+  <!-- Cards de métricas -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <span class="metric-icon">🛍️</span>
+      <span class="metric-value"></span>
+      <span class="metric-label">Produtos</span>
     </div>
+    <div class="metric-card">
+      <span class="metric-icon">📦</span>
+      <span class="metric-value"></span>
+      <span class="metric-label">Categorias</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">💰</span>
+      <span class="metric-value"></span>
+      <span class="metric-label">Vendas</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">👥</span>
+      <span class="metric-value"></span>
+      <span class="metric-label">Clientes</span>
+    </div>
+  </div>
+
+  <!-- Cards de ação rápida -->
+  <h2 class="section-title">Acesso Rápido</h2>
+  <div class="actions-grid">
+    <div class="action-card" routerLink="/produtos">
+      <div class="action-icon">🛍️</div>
+      <div class="action-info">
+        <h3>Produtos</h3>
+        <p>Gerencie seu estoque</p>
+      </div>
+    </div>
+    <div class="action-card" routerLink="/categorias">
+      <div class="action-icon">📦</div>
+      <div class="action-info">
+        <h3>Categorias</h3>
+        <p>Organize seus produtos</p>
+      </div>
+    </div>
+    <div class="action-card" routerLink="/vendas">
+      <div class="action-icon">💰</div>
+      <div class="action-info">
+        <h3>Vendas</h3>
+        <p>Acompanhe suas vendas</p>
+      </div>
+    </div>
+    <div class="action-card" routerLink="/clientes">
+      <div class="action-icon">👥</div>
+      <div class="action-info">
+        <h3>Clientes</h3>
+        <p>Gerencie seus clientes</p>
+      </div>
+    </div>
+  </div>
 </div>

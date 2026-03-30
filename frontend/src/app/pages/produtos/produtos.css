@@ -110,7 +110,6 @@ td.center {
     width: 100%;
   }
 
-  /* Esconde o cabeçalho */
   .produto-table thead {
     display: none;
   }
@@ -121,7 +120,6 @@ td.center {
     gap: 20px;
   }
 
-  /* Cada linha vira um card */
   .produto-table tr {
     display: flex;
     flex-direction: column;
@@ -144,7 +142,6 @@ td.center {
     border-bottom: none;
   }
 
-  /* Nome da coluna antes do valor */
   .produto-table td::before {
     content: attr(data-label);
     font-weight: 700;

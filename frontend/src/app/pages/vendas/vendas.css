@@ -38,7 +38,6 @@
   transform: translateY(-2px);
 }
 
-/* Tabela de vendas */
 .vendas-table table {
   width: 100%;
   border-collapse: separate;
@@ -116,7 +115,6 @@
   background-color: #c9302c;
 }
 
-/* Responsividade */
 /* ===== MOBILE — transforma tabela em cards ===== */
 @media (max-width: 1160px) {
   .vendas-container {
@@ -129,12 +127,10 @@
     width: 100%;
   }
 
-  /* Esconde o cabeçalho */
   .vendas-table thead {
     display: none;
   }
 
-  /* 👇 Tbody vira um grid de 2 colunas */
   .vendas-table tbody {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -151,7 +147,6 @@
     padding: 12px;
   }
 
-  /* Cada célula vira uma linha do card */
   .vendas-table td {
     display: flex;
     justify-content: space-between;
@@ -176,7 +171,6 @@
     margin-right: 8px;
   }
 
-  /* Botões lado a lado */
   .actions {
     flex-direction: row;
     flex-wrap: wrap;
@@ -193,7 +187,6 @@
     min-width: 60px;
   }
 
-  /* 👇 Em telas muito pequenas, 1 coluna só */
   @media (max-width: 480px) {
     .vendas-table tbody {
       grid-template-columns: 1fr;
