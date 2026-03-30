@@ -25,7 +25,7 @@
 .add-product {
   background-color: #007bff;
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   width: 180px;
 }
 
@@ -37,7 +37,7 @@
 /* ===== TABELA ===== */
 .produto-table {
   width: 100%;
-  overflow-x: auto; /* scroll horizontal se necessário */
+  overflow-x: auto;
 }
 
 .produto-table table {
@@ -56,14 +56,20 @@
   padding: 15px;
   text-align: center;
   align-items: center;
+  vertical-align: middle;
 }
 
 .produto-table td {
   background-color: #fff;
-  color: #555;
+  color: #000000;
   font-size: 14px;
   padding: 15px;
   border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+td.center {
+  text-align: center;
 }
 
 /* ===== BOTÕES DE AÇÃO ===== */
@@ -109,7 +115,6 @@
     display: none;
   }
 
-  /* 👇 Tbody vira um grid de 2 colunas */
   .produto-table tbody {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -126,7 +131,6 @@
     padding: 12px;
   }
 
-  /* Cada célula vira uma linha do card */
   .produto-table td {
     display: flex;
     justify-content: space-between;
@@ -151,7 +155,6 @@
     margin-right: 8px;
   }
 
-  /* Botões lado a lado */
   .actions {
     flex-direction: row;
     flex-wrap: wrap;
@@ -168,7 +171,6 @@
     min-width: 60px;
   }
 
-  /* 👇 Em telas muito pequenas, 1 coluna só */
   @media (max-width: 480px) {
     .produto-table tbody {
       grid-template-columns: 1fr;

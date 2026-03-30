@@ -1,9 +1,9 @@
 /* Estilos principais para o card de clientes */
 .clientes-container {
   padding: 20px;
-  background-color: #f4f6f8;
+  background-color: rgba(255, 255, 255, 0.856);
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,19 +52,23 @@
 }
 
 .clientes-table th {
-  background-color: #f0f0f0;
+  background-color: #2575fc;
   font-weight: 600;
-  color: #333;
+  color: #fff;
   text-transform: uppercase;
   font-size: 14px;
   width: 100vw;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .clientes-table td {
   background-color: #fff;
-  color: #555;
+  color: #000000;
   border-bottom: 1px solid #ddd;
   font-size: 14px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .clientes-table td:first-child {
@@ -73,6 +77,10 @@
 
 .clientes-table td:last-child {
   border-right: 1px solid #ddd;
+}
+
+td .nome {
+  text-align: left;
 }
 
 /* Botões na tabela */
@@ -119,61 +127,82 @@
   color: #d9534f; /* Cor vermelha para a dívida */
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
+/* ===== MOBILE — transforma tabela em cards ===== */
+@media (max-width: 968px) {
   .clientes-container {
-    padding: 15px; /* Diminui o padding nas telas menores */
+    padding: 12px;
+    margin-top: 10px;
+    align-items: stretch;
   }
 
-  .btn {
-    width: 100%; /* Torna os botões de "Novo Cliente" mais largos em telas pequenas */
-    margin-bottom: 10px;
-  }
-
-  .clientes-table {
+  .add-client {
     width: 100%;
-    margin-top: 20px;
   }
 
-  .clientes-table th {
-    font-size: 12px;
+  /* Esconde o cabeçalho */
+  .clientes-table thead {
+    display: none;
   }
 
-  .clientes-table td {
-    font-size: 12px;
+  .clientes-table tbody {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
   }
 
-  .actions {
-    flex-direction: column; /* Empilha os botões em dispositivos menores */
-    gap: 10px;
-    align-items: center;
-  }
-
-  .clientes-table td {
-    padding: 12px; /* Diminui o padding das células */
-  }
-}
-
-@media (max-width: 480px) {
-  .clientes-container {
-    padding: 10px; /* Menos padding para telas pequenas */
-  }
-
-  .btn {
-    width: 100%; /* Botões maiores em telas pequenas */
-  }
-
-  .clientes-table th, .clientes-table td {
-    font-size: 11px;
-  }
-
-  .actions {
+  /* Cada linha vira um card */
+  .clientes-table tr {
+    display: flex;
     flex-direction: column;
-    gap: 12px;
-    align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 12px;
   }
 
   .clientes-table td {
-    padding: 10px; /* Menos padding nas células */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 6px;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 13px;
+  }
+
+  .clientes-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Nome da coluna antes do valor */
+  .clientes-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #2575fc;
+    font-size: 11px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+
+  .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 4px;
+  }
+
+  .details, .edit, .delete {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 12px;
+    min-width: 60px;
+  }
+
+  @media (max-width: 480px) {
+    .clientes-table tbody {
+      grid-template-columns: 1fr;
+    }
   }
 }
