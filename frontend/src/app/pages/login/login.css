@@ -1,11 +1,11 @@
-:root {
+/*:root {
   --primary-color: #6a11cb;
   --secondary-color: #2575fc;
   --accent-color: #ff6b6b;
   --text-color: #495057;
   --bg-color: #f0f2f5;
 }
-
+*/
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f0f2f5;
@@ -26,12 +26,12 @@
             font-family: 'Nunito', sans-serif;
             font-weight: 900;
             font-size: 2.5rem;
-            color: var(--primary-color);
+            color: #6a11cb;
         }
 
         .login-card-subheader {
             font-size: 1rem;
-            color: var(--text-color);
+            color: #495057;
             margin-bottom: 2rem;
         }
 
@@ -65,7 +65,7 @@
         }
 
         .signup-link {
-            color: var(--secondary-color);
+            color: #2575fc;
             font-weight: 500;
             text-decoration: none;
         }
@@ -155,7 +155,7 @@
             position: relative;
         }
         
-        .questify-animation-container {
+        .lojinha-animation-container {
             position: relative;
             width: 150px;
             height: 200px;

@@ -42,49 +42,56 @@
                                             <div>Pronto para novas <span>Conquistas</span>?</div>
                                         </li>
                                         <li>
-                                            <div>Pronto para novos <span>Produtos</span>?</div>
+                                            <div>Pronto para novas <span>Descobertas</span>?</div>
+                                        </li>
+                                        <li>
+                                            <div>Comece sua <span>Jornada</span>!</div>
                                         </li>
                                     </ul>
                                 </div>
                             </header>
 
-                            <form th:action="@{/cadastro}" th:object="${cadastroRequest}" method="post">
-                                <div th:if="${param.success}" class="alert alert-success" role="alert">
-                                    Cadastro realizado com sucesso! Faça o login para continuar.
-                                </div>
-                                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                                    <span th:text="${param.error[0]}">Ocorreu um erro no cadastro.</span>
+                            <form>
+                                @if (erro) {
+                                    <div class="alert alert-danger" role="alert">{{ erro }}</div>
+                                }
+                                @if (sucesso) {
+                                    <div class="alert alert-success" role="alert">{{ sucesso }}</div>
+                                }
+
+                                <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome"
+                                        placeholder="Seu nome completo"
+                                        [(ngModel)]="nome" required />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nome" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="nome"
-                                           placeholder="Seu nome completo" th:field="*{nome}" required>
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email"
+                                        placeholder="seuemail@exemplo.com"
+                                        [(ngModel)]="email" required />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email"
-                                           placeholder="seuemail@exemplo.com" th:field="*{email}" required>
+                                <label for="password" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="password"
+                                        placeholder="Crie uma senha forte"
+                                        [(ngModel)]="senha" required />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Senha</label>
-                                    <input type="password" class="form-control" id="password"
-                                           placeholder="Crie uma senha forte" th:field="*{password}" required>
+                                <label for="confirmPassword" class="form-label">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="confirmPassword"
+                                        placeholder="Confirme sua senha"
+                                        [(ngModel)]="confirmarSenha" required />
                                 </div>
                                 <div class="mb-4">
                                     <label for="confirmPassword" class="form-label">Confirmar Senha</label>
-                                    <input type="password" class="form-control" id="confirmPassword"
-                                           placeholder="Confirme sua senha" th:field="*{confirmPassword}" required>
+                                    <select id="tipo" class="form-select" [(ngModel)]="tipo" required>
+                                    <option value="" disabled>Selecione o tipo</option>
+                                    <option value="CNPJ">CNPJ</option>
+                                    <option value="CPF">CPF</option>
+                                </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="tipo" class="form-label">Tipo de Usuário</label>
-                                    <select id="tipo" class="form-select" th:field="*{tipo}" required>
-                                        <option value="" disabled selected>Selecione o tipo</option>
-                                        <option th:each="tipo : ${tiposUsuario}"
-                                                th:value="${tipo}"
-                                                th:text="${tipo}">
-                                        </option>
-                                    </select>
-                                </div>
+
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary btn-cadastro">
                                         <i class="bi bi-person-plus-fill"></i> Cadastrar

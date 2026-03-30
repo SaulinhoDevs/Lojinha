@@ -15,8 +15,10 @@ import { ClienteDetails } from './pages/cliente-details/cliente-details';
 import { ProdutoDetails } from './pages/produto-details/produto-details';
 import { CategoriaDetails } from './pages/categoria-details/categoria-details';
 
-// app.routes.ts
 export const routes: Routes = [
+  // Redireciona a raiz para o login
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  
   // Rotas SEM header e sidebar (login, cadastro)
   {
     path: '',
@@ -49,7 +51,4 @@ export const routes: Routes = [
       { path: 'categorias/:id', component: CategoriaDetails },
     ],
   },
-
-  // Redireciona a raiz para o login
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
