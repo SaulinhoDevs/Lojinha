@@ -1,14 +1,15 @@
 <header class="header">
-    <div class="header-spacer"></div>
+  <!-- Botão Assistente Virtual -->
+  <button class="assistant-btn" routerLink="/chat-bot">
+    <span class="assistant-icon">✦</span>
+    Assistente Virtual
+  </button>
 
-    <button matButton="elevated" routerLink="/chat-bot">Assistente Virtual</button>
-
-    <!-- Profile Section -->
-    <div class="profile-container">
-        <span class="profile-name">Saulo Melo</span>
-        <div class="profile-avatar">
-            <img src="https://picsum.photos/seed/saulo/100/100" alt="Saulo Melo" class="avatar-img"
-                referrerpolicy="no-referrer">
-        </div>
+  <!-- Profile -->
+  <div class="profile-container">
+    <span class="profile-name">{{ userName }}</span>
+    <div class="profile-avatar" [style.background]="avatarColor">
+      <span class="avatar-initials">{{ userInitials }}</span>
     </div>
+  </div>
 </header>
