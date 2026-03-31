@@ -1,13 +1,10 @@
 package com.lojinhasystem.system.resources.chat;
 
+import com.lojinhasystem.system.entities.InteracaoChat;
 import com.lojinhasystem.system.services.ChatBotService;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -29,4 +26,8 @@ public class ChatController {
         return new ChatMessage(resposta);
     }
 
+    @GetMapping
+    public List<InteracaoChat> buscarHistorico() {
+        return chatBotService.buscarHistoricoCompleto();
+    }
 }

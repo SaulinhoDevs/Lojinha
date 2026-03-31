@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -23,7 +23,7 @@ import { catchError, throwError } from 'rxjs';
   templateUrl: './chat-bot.html',
   styleUrl: './chat-bot.css',
 })
-export class ChatBot {
+export class ChatBot implements OnInit {
   @ViewChild('chatHistory')
   private chatHistory!: ElementRef;
 
@@ -35,24 +35,52 @@ export class ChatBot {
 
   local = false;
 
-  messages = signal([{ text: 'Olá! Como posso te ajudar hoje?', isBot: true }]);
+  messages = signal<{ text: string; isBot: boolean }[]>([]);
+
+  ngOnInit(): void {
+    this.carregarHistorico();
+  }
+
+  private carregarHistorico() {
+    this.chatService.buscarHistorico().subscribe({
+      next: (historicoBanco) => {
+        const mensagensMapeadas: { text: string; isBot: boolean }[] = [];
+
+        mensagensMapeadas.push({ text: 'Olá! Como posso te ajudar hoje?', isBot: true });
+
+        historicoBanco.forEach((item: any) => {
+          mensagensMapeadas.push({ text: item.pergunta, isBot: false });
+          mensagensMapeadas.push({ text: item.resposta, isBot: true });
+        });
+
+        this.messages.set(mensagensMapeadas);
+
+        setTimeout(() => this.scrollToBottom(), 100);
+      },
+      error: (err) => console.error('Erro ao carregar histórico:', err),
+    });
+  }
 
   sendMessage() {
     this.trimUserMessage();
     if (this.userInput !== '' && !this.isLoading) {
-      this.updateMessages(this.userInput);
+      const perguntaEnviada = this.userInput;
+
+      this.updateMessages(perguntaEnviada);
       this.isLoading = true;
+      this.userInput = '';
+
       if (this.local) {
         this.simulateResponse();
       } else {
-        this.sendChatMessage();
+        this.sendChatMessage(perguntaEnviada);
       }
     }
   }
 
-  private sendChatMessage() {
+  private sendChatMessage(pergunta: string) {
     this.chatService
-      .sendChatMessage(this.userInput)
+      .sendChatMessage(pergunta)
       .pipe(
         catchError(() => {
           this.updateMessages('Desculpe, não consigo processar seu pedido no momento.', true);
@@ -60,16 +88,15 @@ export class ChatBot {
           return throwError(() => new Error('Erro ocorreu ao mandar a mensagem.'));
         }),
       )
-      .subscribe((response) => {
+      .subscribe((response: any) => {
         this.updateMessages(response.message, true);
-        this.userInput = '';
         this.isLoading = false;
       });
   }
 
   private updateMessages(text: string, isBot = false) {
     this.messages.update((messages) => [...messages, { text, isBot }]);
-    this.scrollToBottom();
+    setTimeout(() => this.scrollToBottom(), 50);
   }
 
   private trimUserMessage() {
@@ -80,7 +107,6 @@ export class ChatBot {
     setTimeout(() => {
       const response = 'Esta é uma resposta simulada do bot.';
       this.updateMessages(response, true);
-      this.userInput = '';
       this.isLoading = false;
     }, 2000);
   }

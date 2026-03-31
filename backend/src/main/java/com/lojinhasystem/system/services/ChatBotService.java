@@ -42,4 +42,8 @@ public class ChatBotService {
 
         return respostaIA;
     }
+
+    public List<InteracaoChat> buscarHistoricoCompleto() {
+        return repository.findAll();
+    }
 }
