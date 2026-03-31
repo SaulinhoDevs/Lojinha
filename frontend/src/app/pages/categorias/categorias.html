@@ -16,7 +16,7 @@
           <td>{{ categoria.nome }}</td>
           <td class="actions">
             <button class="btn details" [routerLink]="['/categorias', categoria.id]">Detalhes</button>
-            <button class="btn edit">Editar</button>
+            <button class="btn edit" [routerLink]="['/categorias', categoria.id, 'editar']">Editar</button>
             <button class="btn delete" (click)="excluir(categoria.id, categoria.nome)">Excluir</button>
           </td>
         </tr>

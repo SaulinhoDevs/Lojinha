@@ -35,6 +35,10 @@ export class ClientsService {
     return this.http.get<Cliente>(`${ClientsService.BASE_PATH}/clientes/${id}`);
   }
 
+  updateCliente(id: number, dados: any): Observable<Cliente> {
+    return this.http.put<Cliente>(`${ClientsService.BASE_PATH}/clientes/${id}`, dados);
+  }
+
   deleteCliente(id: number): Observable<void> {
     return this.http.delete<void>(`${ClientsService.BASE_PATH}/clientes/${id}`);
   }

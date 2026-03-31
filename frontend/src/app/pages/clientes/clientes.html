@@ -22,7 +22,7 @@
           <td data-label="Dívida" class="dívida">R$ {{cliente.divida | number:'1.2-2' }}</td>
           <td class="actions">
             <button class="btn details" [routerLink]="['/clientes', cliente.id]">Detalhes</button>
-            <button class="btn edit">Editar</button>
+            <button class="btn edit" [routerLink]="['/clientes', cliente.id, 'editar']">Editar</button>
             <button class="btn delete" (click)="excluir(cliente.id, cliente.nome)">Excluir</button>
           </td>
         </tr>

@@ -17,7 +17,8 @@
   </div>
 
   <div class="form-actions">
-    <button type="submit" class="btn-submit" [disabled]="formulario.invalid">Salvar Categoria</button>
+    <button type="submit" class="btn-submit" [disabled]="formulario.invalid">{{ modoEdicao ? 'Atualizar Categoria' :
+      'Salvar Categoria' }}</button>
   </div>
 
 </form>

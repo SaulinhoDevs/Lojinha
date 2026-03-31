@@ -29,6 +29,10 @@ export class CategoriasService {
     return this.http.get<Categoria>(`${CategoriasService.BASE_PATH}/categorias/${id}`);
   }
 
+  updateCategoria(id: number, dados: any): Observable<Categoria> {
+    return this.http.put<Categoria>(`${CategoriasService.BASE_PATH}/categorias/${id}`, dados);
+  }
+
   deleteCategoria(id: number): Observable<void> {
     return this.http.delete<void>(`${CategoriasService.BASE_PATH}/categorias/${id}`);
   }
