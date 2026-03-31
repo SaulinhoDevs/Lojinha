@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css'
 })
@@ -14,11 +14,46 @@ export class Cadastro {
   email = '';
   senha = '';
   tipo = '';
+  documento = '';
   erro = '';
   sucesso = '';
+  saindo = false;
 
-constructor(private router: Router) {}
+  constructor(private router: Router) {}
+  onTipoChange() {
+    this.documento = '';
+  }
 
+  aplicarMascara(event: Event) {
+    const input = event.target as HTMLInputElement;
+    let valor = input.value.replace(/\D/g, ''); // remove tudo que não é número
+
+    if (this.tipo === 'CPF') {
+      // Máscara: 000.000.000-00
+      valor = valor.substring(0, 11);
+      valor = valor
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+    } else if (this.tipo === 'CNPJ') {
+      // Máscara: 00.000.000/0000-00
+      valor = valor.substring(0, 14);
+      valor = valor
+        .replace(/(\d{2})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1/$2')
+        .replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+    }
+
+    this.documento = valor;
+  }
+
+    navegarCom(rota: string) {
+    this.saindo = true;
+    setTimeout(() => this.router.navigate([rota]), 500);
+  }
+  
   cadastrar() {
     this.erro = '';
     this.sucesso = '';
@@ -28,8 +63,10 @@ constructor(private router: Router) {}
       return;
     }
 
-    // Aqui você chama seu serviço de cadastro
-    // this.authService.cadastrar(...)
+    if (!this.documento) {
+      this.erro = `Preencha o ${this.tipo}.`;
+      return;
+    }
 
     this.router.navigate(['/login']);
   }

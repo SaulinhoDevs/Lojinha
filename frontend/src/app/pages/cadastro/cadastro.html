@@ -49,38 +49,71 @@
 
                             <form>
                                 @if (erro) {
-                                    <div class="alert alert-danger" role="alert">{{ erro }}</div>
+                                  <div class="alert alert-danger" role="alert">{{ erro }}</div>
                                 }
                                 @if (sucesso) {
-                                    <div class="alert alert-success" role="alert">{{ sucesso }}</div>
+                                  <div class="alert alert-success" role="alert">{{ sucesso }}</div>
                                 }
-
+                              
                                 <div class="mb-3">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome"
-                                        placeholder="Seu nome completo"
-                                />
+                                  <label for="nome" class="form-label">Nome</label>
+                                  <input type="text" class="form-control" id="nome"
+                                         name="nome"                          
+                                         placeholder="Seu nome completo"
+                                         [(ngModel)]="nome"
+                                         required />
                                 </div>
+                              
                                 <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email"
-                                        placeholder="seuemail@exemplo.com"
-                                />
+                                  <label for="email" class="form-label">Email</label>
+                                  <input type="email" class="form-control" id="email"
+                                         name="email"                          
+                                         placeholder="seuemail@exemplo.com"
+                                         [(ngModel)]="email"
+                                         required />
                                 </div>
+                              
                                 <div class="mb-3">
-                                <label for="password" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="password"
-                                        placeholder="Crie uma senha forte"
-                                />
+                                  <label for="senha" class="form-label">Senha</label>
+                                  <input type="password" class="form-control" id="senha"
+                                         name="senha"                          
+                                         placeholder="Crie uma senha forte"
+                                         [(ngModel)]="senha"
+                                         required />
                                 </div>
+                              
                                 <div class="mb-4">
-                                    <label for="tipo" class="form-label">Tipo</label>
-                                    <select id="tipo" class="form-select">
+                                  <label for="tipo" class="form-label">Tipo</label>
+                                  <select id="tipo" class="form-select"
+                                          name="tipo"                          
+                                          [(ngModel)]="tipo"
+                                          (ngModelChange)="onTipoChange()"
+                                          required>
                                     <option value="" disabled>Selecione o tipo</option>
-                                    <option value="CNPJ">CNPJ</option>
                                     <option value="CPF">CPF</option>
-                                </select>
+                                    <option value="CNPJ">CNPJ</option>
+                                  </select>
                                 </div>
+                              
+                                <!-- 👇 Campo aparece ao selecionar CPF ou CNPJ -->
+                                @if (tipo === 'CPF' || tipo === 'CNPJ') {
+                                  <div class="mb-4">
+                                    <label for="documento" class="form-label">
+                                      {{ tipo === 'CPF' ? 'CPF' : 'CNPJ' }}
+                                    </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="documento"
+                                      name="documento"                        
+                                      [placeholder]="tipo === 'CPF' ? '000.000.000-00' : '00.000.000/0000-00'"
+                                      [(ngModel)]="documento"
+                                      (input)="aplicarMascara($event)"
+                                      [maxlength]="tipo === 'CPF' ? 14 : 18"
+                                      required
+                                    />
+                                  </div>
+                                }
 
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary btn-cadastro">
