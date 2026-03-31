@@ -35,4 +35,7 @@ export class ClientsService {
     return this.http.get<Cliente>(`${ClientsService.BASE_PATH}/clientes/${id}`);
   }
 
+  deleteCliente(id: number): Observable<void> {
+    return this.http.delete<void>(`${ClientsService.BASE_PATH}/clientes/${id}`);
+  }
 }

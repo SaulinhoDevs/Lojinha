@@ -26,6 +26,10 @@ export class CategoriasService {
   }
 
   buscarPorId(id: number): Observable<Categoria> {
-      return this.http.get<Categoria>(`${CategoriasService.BASE_PATH}/categorias/${id}`);
-    }
+    return this.http.get<Categoria>(`${CategoriasService.BASE_PATH}/categorias/${id}`);
+  }
+
+  deleteCategoria(id: number): Observable<void> {
+    return this.http.delete<void>(`${CategoriasService.BASE_PATH}/categorias/${id}`);
+  }
 }

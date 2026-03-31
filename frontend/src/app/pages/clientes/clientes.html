@@ -23,7 +23,7 @@
           <td class="actions">
             <button class="btn details" [routerLink]="['/clientes', cliente.id]">Detalhes</button>
             <button class="btn edit">Editar</button>
-            <button class="btn delete">Excluir</button>
+            <button class="btn delete" (click)="excluir(cliente.id, cliente.nome)">Excluir</button>
           </td>
         </tr>
       </tbody>
