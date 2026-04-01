@@ -34,6 +34,7 @@ public class ChatBotService {
         String respostaIA = this.chatClient.prompt()
                 .system(contextoMemoria.toString())
                 .user(mensagemUsuario)
+                .toolNames("buscarProdutoMaisVendido")
                 .call()
                 .content();
 
