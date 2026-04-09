@@ -1,5 +1,7 @@
 package com.lojinhasystem.system.entities.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum StatusVenda {
 
     PAGO(1),
@@ -12,6 +14,7 @@ public enum StatusVenda {
         this.codigo = codigo;
     }
 
+    @JsonValue
     public int getCodigo() {
         return codigo;
     }

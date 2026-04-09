@@ -9,8 +9,8 @@ export class ProductsService {
 
   private http = inject(HttpClient);
 
-  getProducts() {
-    return this.http.get(`${ProductsService.BASE_PATH}/produtos`);
+  getProducts(): Observable<Produto[]> {
+    return this.http.get<Produto[]>(`${ProductsService.BASE_PATH}/produtos`);
   }
 
   buscarPorId(id: number): Observable<Produto> {

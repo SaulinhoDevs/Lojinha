@@ -1,0 +1,89 @@
+<form [formGroup]="formulario" (ngSubmit)="salvar()" class="form-container">
+
+  <div class="form-row">
+    <div class="form-group flex-1">
+      <label>Cliente *</label>
+      <select formControlName="clienteId" [class.input-error]="isCampoInvalido('clienteId')">
+        <option value="" disabled selected>Selecione o Cliente</option>
+        @for (cliente of listaDeClientes; track cliente.id) {
+        <option [value]="cliente.id">{{ cliente.nome }}</option>
+        }
+      </select>
+
+      @if (isCampoInvalido('clienteId')) {
+      <span class="error-message">A escolha do cliente é obrigatória.</span>
+      }
+    </div>
+
+    <div class="form-group flex-1">
+      <label>Status do Pagamento *</label>
+      <select formControlName="status" [class.input-error]="isCampoInvalido('status')">
+        <option value="1">Pago</option>
+        <option value="2">Aguardando Pagamento</option>
+        <option value="3">Parcelado</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group flex-1">
+      <label>Frete (R$)</label>
+      <input type="number" step="0.01" formControlName="frete" placeholder="R$ 0,00"
+        [class.input-error]="isCampoInvalido('frete')">
+    </div>
+
+    <div class="form-group flex-1">
+      <label>Desconto (R$)</label>
+      <input type="number" step="0.01" formControlName="desconto" placeholder="R$ 0,00"
+        [class.input-error]="isCampoInvalido('desconto')">
+    </div>
+  </div>
+
+  <hr class="form-divider">
+
+  <div class="form-group">
+    <label class="section-title">Carrinho de Produtos *</label>
+
+    <div formArrayName="itens">
+      @for (item of itensFormArray.controls; track $index) {
+      <div [formGroupName]="$index" class="form-row dynamic-row">
+
+        <div class="form-group flex-1">
+          <label>Produto</label>
+          <select formControlName="produtoId"
+            [class.input-error]="item.get('produtoId')?.invalid && (item.get('produtoId')?.touched || item.get('produtoId')?.dirty)">
+            <option value="" disabled selected>Selecione um Produto...</option>
+            @for (prod of listaDeProdutos; track prod.id) {
+            <option [value]="prod.id">{{ prod.nome }} (Estoque: {{prod.estoque}})</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group quantidade-group">
+          <label>Qtd *</label>
+          <input type="number" formControlName="quantidade" min="1"
+            [class.input-error]="item.get('quantidade')?.invalid && (item.get('quantidade')?.touched || item.get('quantidade')?.dirty)">
+        </div>
+
+        <div class="form-group btn-remove-group">
+          <button type="button" class="btn-remove" (click)="removerItem($index)">
+            Remover
+          </button>
+        </div>
+
+      </div>
+      }
+    </div>
+
+    <button type="button" class="btn-add-item" (click)="adicionarItem()">
+      + Adicionar Outro Produto
+    </button>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn-submit" [disabled]="formulario.invalid">
+      {{ modoEdicao ? 'Atualizar Venda' : 'Finalizar Venda' }}
+    </button>
+  </div>
+
+</form>

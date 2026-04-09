@@ -14,6 +14,7 @@ import { MainLayout } from './componentes/layouts/main-layout/main-layout';
 import { ClienteDetails } from './pages/cliente-details/cliente-details';
 import { ProdutoDetails } from './pages/produto-details/produto-details';
 import { CategoriaDetails } from './pages/categoria-details/categoria-details';
+import { VendaForm } from './pages/venda-form/venda-form';
 
 export const routes: Routes = [
   // Redireciona a raiz para o login
@@ -38,13 +39,14 @@ export const routes: Routes = [
       { path: 'produtos', component: Produtos },
       { path: 'clientes', component: Clientes },
       { path: 'vendas', component: Vendas },
+      { path: 'categorias', component: Categorias },
       {
         path: 'chat-bot',
         loadComponent: () => import('./ia/chat-bot/chat-bot').then((c) => c.ChatBot),
       },
       { path: 'cliente-form', component: ClienteForm },
-      { path: 'categorias', component: Categorias },
       { path: 'categoria-form', component: CategoriaForm },
+      { path: 'venda-form', component: VendaForm },
       { path: 'produto-form', component: ProdutoForm },
       { path: 'clientes/:id', component: ClienteDetails },
       { path: 'produtos/:id', component: ProdutoDetails },

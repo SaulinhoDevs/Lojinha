@@ -3,7 +3,6 @@ package com.lojinhasystem.system.config;
 import com.lojinhasystem.system.entities.*;
 import com.lojinhasystem.system.entities.enums.StatusVenda;
 import com.lojinhasystem.system.repositories.*;
-import com.lojinhasystem.system.services.DividaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -36,9 +35,6 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
-
-    @Autowired
-    private DividaService dividaService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -84,31 +80,6 @@ public class TestConfig implements CommandLineRunner {
         Cliente c4 = new Cliente(null, "Carlos Souza", 0.0, "71995554444", "Rua Bahia", "Cajazeiras", 404);
         Cliente c5 = new Cliente(null, "Fernanda Lima", 0.0, "71992221111", "Rua Verde", "Brotas", 505);
 
-        Venda v1 = new Venda(null, LocalDate.of(2025, 10, 10), 20.00, 10.00, StatusVenda.PAGO, c1);
-        Venda v2 = new Venda(null, LocalDate.of(2025, 10, 11), 0.00, 0.00, StatusVenda.AGUARDANDO_PAGAMENTO, c2);
-        Venda v3 = new Venda(null, LocalDate.of(2025, 10, 12), 35.00, 50.00, StatusVenda.PAGO, c3);
-        Venda v4 = new Venda(null, LocalDate.of(2025, 10, 15), 15.00, 0.00, StatusVenda.AGUARDANDO_PAGAMENTO, c4);
-        Venda v5 = new Venda(null, LocalDate.of(2025, 10, 20), 0.00, 30.00, StatusVenda.PAGO, c5);
-        Venda v6 = new Venda(null, LocalDate.of(2024, 4, 20), 30.00, 15.00, StatusVenda.PAGO, c1);
-
         clienteRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5));
-        vendaRepository.saveAll(Arrays.asList(v1, v2, v3, v4, v5, v6));
-
-        ItemPedido ip1 = new ItemPedido(v1, p1, 2, p1.getPrecoVenda());
-        ItemPedido ip2 = new ItemPedido(v2, p2, 3, p2.getPrecoVenda());
-        ItemPedido ip3 = new ItemPedido(v3, p3, 1, p3.getPrecoVenda());
-        ItemPedido ip4 = new ItemPedido(v4, p4, 1, p4.getPrecoVenda());
-        ItemPedido ip5 = new ItemPedido(v5, p5, 2, p5.getPrecoVenda());
-        ItemPedido ip6 = new ItemPedido(v6, p5, 1, p5.getPrecoVenda());
-        ItemPedido ip7 = new ItemPedido(v1, p2, 1, p2.getPrecoVenda());
-
-        itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4, ip5, ip6, ip7));
-
-        dividaService.registrarDivida(v1);
-        dividaService.registrarDivida(v2);
-        dividaService.registrarDivida(v3);
-        dividaService.registrarDivida(v4);
-        dividaService.registrarDivida(v5);
-        dividaService.registrarDivida(v6);
     }
 }
