@@ -15,6 +15,7 @@ import { ClienteDetails } from './pages/cliente-details/cliente-details';
 import { ProdutoDetails } from './pages/produto-details/produto-details';
 import { CategoriaDetails } from './pages/categoria-details/categoria-details';
 import { VendaForm } from './pages/venda-form/venda-form';
+import { VendaDetails } from './pages/venda-details/venda-details';
 
 export const routes: Routes = [
   // Redireciona a raiz para o login
@@ -51,6 +52,7 @@ export const routes: Routes = [
       { path: 'clientes/:id', component: ClienteDetails },
       { path: 'produtos/:id', component: ProdutoDetails },
       { path: 'categorias/:id', component: CategoriaDetails },
+      { path: 'vendas/:id', component: VendaDetails },
       { path: 'produtos/:id/editar', component: ProdutoForm },
       { path: 'categorias/:id/editar', component: CategoriaForm },
       { path: 'clientes/:id/editar', component: ClienteForm },

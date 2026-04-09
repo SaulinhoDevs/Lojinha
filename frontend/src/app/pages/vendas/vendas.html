@@ -20,12 +20,12 @@
       <tbody>
         <tr *ngFor="let venda of vendas">
           <td data-label="Data da Venda">{{ venda.dataVenda | date:'dd/MM/yyyy' }}</td>
-          <td data-label="Frete">R$ {{ venda.frete | number:'1.2-2' }}</td>
-          <td data-label="Desconto">R$ {{ venda.desconto | number:'1.2-2' }}</td>
-          <td data-label="Total">R$ {{ venda.total | number:'1.2-2' }}</td>
+          <td data-label="Frete">{{ venda.frete | currency:'BRL' }}</td>
+          <td data-label="Desconto">{{ venda.desconto | currency:'BRL' }}</td>
+          <td data-label="Total">{{ venda.total | currency:'BRL' }}</td>
           <td data-label="Status">{{ statusTradutor[venda.status] }}</td>
           <td data-label="Ações" class="actions">
-            <button class="btn details">Detalhes</button>
+            <button class="btn details" [routerLink]="['/vendas', venda.id]">Detalhes</button>
             <button class="btn edit">Editar</button>
             <button class="btn delete">Excluir</button>
           </td>

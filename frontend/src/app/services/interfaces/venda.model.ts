@@ -5,6 +5,7 @@ export interface Venda {
   id?: number;
   frete: number;
   desconto: number;
+  total: number;
   status: number;
   cliente: Cliente;
   itens: ItemPedido[];
