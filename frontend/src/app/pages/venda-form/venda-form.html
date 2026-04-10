@@ -4,7 +4,7 @@
     <div class="form-group flex-1">
       <label>Cliente *</label>
       <select formControlName="clienteId" [class.input-error]="isCampoInvalido('clienteId')">
-        <option value="" disabled selected>Selecione o Cliente</option>
+        <option value="" disabled>Selecione o Cliente</option>
         @for (cliente of listaDeClientes; track cliente.id) {
         <option [value]="cliente.id">{{ cliente.nome }}</option>
         }
@@ -18,9 +18,9 @@
     <div class="form-group flex-1">
       <label>Status do Pagamento *</label>
       <select formControlName="status" [class.input-error]="isCampoInvalido('status')">
-        <option value="1">Pago</option>
-        <option value="2">Aguardando Pagamento</option>
-        <option value="3">Parcelado</option>
+        <option [value]="1">Pago</option>
+        <option [value]="2">Aguardando Pagamento</option>
+        <option [value]="3">Parcelado</option>
       </select>
     </div>
   </div>
@@ -45,24 +45,34 @@
     <label class="section-title">Carrinho de Produtos *</label>
 
     <div formArrayName="itens">
-      @for (item of itensFormArray.controls; track $index) {
+      @for (item of itensFormArray.controls; track item) {
       <div [formGroupName]="$index" class="form-row dynamic-row">
 
         <div class="form-group flex-1">
-          <label>Produto</label>
-          <select formControlName="produtoId"
-            [class.input-error]="item.get('produtoId')?.invalid && (item.get('produtoId')?.touched || item.get('produtoId')?.dirty)">
-            <option value="" disabled selected>Selecione um Produto...</option>
+          <label>Produto *</label>
+          <select formControlName="produtoId" [class.input-error]="isItemCampoInvalido($index, 'produtoId')">
+            <option value="" disabled>Selecione um Produto...</option>
+
             @for (prod of listaDeProdutos; track prod.id) {
-            <option [value]="prod.id">{{ prod.nome }} (Estoque: {{prod.estoque}})</option>
+            <option [value]="prod.id" [disabled]="isProdutoJaSelecionado(prod.id, $index)">
+              {{ prod.nome }} (Estoque: {{ prod.estoque }})
+            </option>
             }
           </select>
+
+          @if (isItemCampoInvalido($index, 'produtoId')) {
+          <span class="error-message">Selecione um produto.</span>
+          }
         </div>
 
         <div class="form-group quantidade-group">
           <label>Qtd *</label>
           <input type="number" formControlName="quantidade" min="1"
-            [class.input-error]="item.get('quantidade')?.invalid && (item.get('quantidade')?.touched || item.get('quantidade')?.dirty)">
+            [class.input-error]="isItemCampoInvalido($index, 'quantidade')">
+
+          @if (isItemCampoInvalido($index, 'quantidade')) {
+          <span class="error-message">Quantidade inválida.</span>
+          }
         </div>
 
         <div class="form-group btn-remove-group">
@@ -81,7 +91,7 @@
   </div>
 
   <div class="form-actions">
-    <button type="submit" class="btn-submit" [disabled]="formulario.invalid">
+    <button type="submit" class="btn-submit" [disabled]="formulario.invalid || carregandoVenda">
       {{ modoEdicao ? 'Atualizar Venda' : 'Finalizar Venda' }}
     </button>
   </div>

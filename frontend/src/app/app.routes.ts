@@ -56,6 +56,7 @@ export const routes: Routes = [
       { path: 'produtos/:id/editar', component: ProdutoForm },
       { path: 'categorias/:id/editar', component: CategoriaForm },
       { path: 'clientes/:id/editar', component: ClienteForm },
+      { path: 'vendas/:id/editar', component: VendaForm },
     ],
   },
 ];
