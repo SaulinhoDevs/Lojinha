@@ -27,7 +27,7 @@
           <td data-label="Ações" class="actions">
             <button class="btn details" [routerLink]="['/vendas', venda.id]">Detalhes</button>
             <button class="btn edit" [routerLink]="['/vendas', venda.id, 'editar']">Editar</button>
-            <button class="btn delete">Excluir</button>
+            <button class="btn delete" (click)="excluir(venda.id, venda.cliente?.nome || 'sem nome')">Excluir</button>
           </td>
         </tr>
       </tbody>

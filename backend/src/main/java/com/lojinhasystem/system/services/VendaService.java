@@ -114,16 +114,46 @@ public class VendaService {
         return obj;
     }
 
+    @Transactional
     public void delete(Long id) {
-        try {
-            if (vendaRepository.existsById(id)) {
-                vendaRepository.deleteById(id);
-            } else {
-                throw new ResourceNotFoundException(id);
-            }
-        } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException(e.getMessage());
+        Venda venda = vendaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+
+        Cliente cliente = venda.getCliente();
+
+        double frete = venda.getFrete() != null ? venda.getFrete() : 0.0;
+        double desconto = venda.getDesconto() != null ? venda.getDesconto() : 0.0;
+
+        double totalItens = 0.0;
+
+        // 1) Devolve estoque de todos os produtos da venda
+        for (ItemPedido item : venda.getItens()) {
+            Produto produto = produtoRepository.findById(item.getProduto().getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
+
+            produto.setEstoque(produto.getEstoque() + item.getQuantidade());
+            produtoRepository.save(produto);
+
+            totalItens += item.getSubTotal();
         }
+
+        double totalVenda = totalItens + frete - desconto;
+
+        // 2) Remove impacto da dívida, se essa venda gerava dívida
+        if (cliente != null && venda.getStatus() == StatusVenda.AGUARDANDO_PAGAMENTO) {
+            double dividaAtual = cliente.getDivida() != null ? cliente.getDivida() : 0.0;
+            double novaDivida = dividaAtual - totalVenda;
+            cliente.setDivida(Math.max(novaDivida, 0.0));
+            clienteRepository.save(cliente);
+        }
+
+        // 3) Exclui os itens da venda
+        for (ItemPedido item : venda.getItens()) {
+            itemPedidoRepository.delete(item);
+        }
+
+        // 4) Exclui a venda
+        vendaRepository.delete(venda);
     }
 
     @Transactional
