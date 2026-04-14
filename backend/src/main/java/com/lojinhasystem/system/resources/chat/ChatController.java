@@ -1,10 +1,9 @@
 package com.lojinhasystem.system.resources.chat;
 
-import com.lojinhasystem.system.entities.InteracaoChat;
-import com.lojinhasystem.system.services.ChatBotService;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -13,21 +12,19 @@ public class ChatController {
 
     private static final Logger LOGGER = Logger.getLogger(ChatController.class.getName());
 
-    private final ChatBotService chatBotService;
+    private final ChatClient chatClient;
 
-    public ChatController(ChatBotService chatBotService) {
-        this.chatBotService = chatBotService;
+    public ChatController(@NotNull ChatClient.Builder chatClientBuilder) {
+        this.chatClient = chatClientBuilder.build();
     }
 
     @PostMapping
     ChatMessage chatBot(@RequestBody ChatMessage chatMessage) {
         LOGGER.info("Passou aqui: " + chatMessage);
-        String resposta = chatBotService.processarMensagem(chatMessage.message());
-        return new ChatMessage(resposta);
-    }
-
-    @GetMapping
-    public List<InteracaoChat> buscarHistorico() {
-        return chatBotService.buscarHistoricoCompleto();
+        var response = this.chatClient.prompt()
+                .user(chatMessage.message())
+                .call()
+                .content();
+        return new ChatMessage(response);
     }
 }
