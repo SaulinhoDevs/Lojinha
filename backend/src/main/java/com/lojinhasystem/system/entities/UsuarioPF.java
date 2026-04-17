@@ -13,8 +13,8 @@ public class UsuarioPF extends Usuario {
 
     }
 
-    public UsuarioPF(Long id, String nome, String rua, String bairro, Integer numero, String telefone, String cpf) {
-        super(id, nome, rua, bairro, numero, telefone);
+    public UsuarioPF(Long id, String nome, String email, String senha, String rua, String bairro, Integer numero, String telefone, String cpf) {
+        super(id, nome, email, senha, rua, bairro, numero, telefone);
         this.cpf = cpf;
     }
 

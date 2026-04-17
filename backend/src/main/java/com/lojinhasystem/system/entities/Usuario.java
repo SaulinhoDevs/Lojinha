@@ -17,6 +17,8 @@ public abstract class Usuario implements Serializable {
     private Long id;
 
     private String nome;
+    private String email;
+    private String senha;
     private String rua;
     private String bairro;
     private Integer numero;
@@ -25,9 +27,11 @@ public abstract class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nome, String rua, String bairro, Integer numero, String telefone) {
+    public Usuario(Long id, String nome, String email, String senha, String rua, String bairro, Integer numero, String telefone) {
         this.id = id;
         this.nome = nome;
+        this.email = email;
+        this.senha = senha;
         this.rua = rua;
         this.bairro = bairro;
         this.numero = numero;
@@ -48,6 +52,22 @@ public abstract class Usuario implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getRua() {

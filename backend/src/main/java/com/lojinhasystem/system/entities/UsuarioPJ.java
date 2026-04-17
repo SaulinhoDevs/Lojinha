@@ -13,8 +13,8 @@ public class UsuarioPJ extends Usuario {
 
     }
 
-    public UsuarioPJ(Long id, String nome, String rua, String bairro, Integer numero, String telefone, String cnpj) {
-        super(id, nome, rua, bairro, numero, telefone);
+    public UsuarioPJ(Long id, String nome, String email, String senha, String rua, String bairro, Integer numero, String telefone, String cnpj) {
+        super(id, nome, email, senha, rua, bairro, numero, telefone);
         this.cnpj = cnpj;
     }
 
