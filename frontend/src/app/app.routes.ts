@@ -16,6 +16,8 @@ import { ProdutoDetails } from './pages/produto-details/produto-details';
 import { CategoriaDetails } from './pages/categoria-details/categoria-details';
 import { VendaForm } from './pages/venda-form/venda-form';
 import { VendaDetails } from './pages/venda-details/venda-details';
+import { authGuard } from './auth/auth-guard';
+import { loginGuard } from './auth/login-guard';
 
 export const routes: Routes = [
   // Redireciona a raiz para o login
@@ -26,7 +28,7 @@ export const routes: Routes = [
     path: '',
     component: AuthLayout,
     children: [
-      { path: 'login', component: Login },
+      { path: 'login', component: Login, canActivate: [loginGuard] },
       { path: 'cadastro', component: Cadastro },
     ],
   },
@@ -35,6 +37,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayout,
+    canActivate: [authGuard],
     children: [
       { path: 'inicio', component: Inicio },
       { path: 'produtos', component: Produtos },
