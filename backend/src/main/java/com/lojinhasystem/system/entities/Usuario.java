@@ -3,11 +3,11 @@ package com.lojinhasystem.system.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-@MappedSuperclass
+@Entity
+@Table(name = "tb_usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,8 +17,13 @@ public abstract class Usuario implements Serializable {
     private Long id;
 
     private String nome;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String senha;
+
     private String rua;
     private String bairro;
     private Integer numero;
@@ -104,6 +109,7 @@ public abstract class Usuario implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
         return Objects.equals(id, usuario.id);

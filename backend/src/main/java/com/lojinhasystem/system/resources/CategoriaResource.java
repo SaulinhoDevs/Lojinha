@@ -50,5 +50,4 @@ public class CategoriaResource {
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }

@@ -1,6 +1,7 @@
 package com.lojinhasystem.system.services;
 
 import com.lojinhasystem.system.entities.Categoria;
+import com.lojinhasystem.system.entities.Usuario;
 import com.lojinhasystem.system.repositories.CategoriaRepository;
 import com.lojinhasystem.system.services.exceptions.DatabaseException;
 import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
@@ -9,7 +10,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CategoriaService {
@@ -17,17 +17,29 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private UsuarioAutenticadoService usuarioAutenticadoService;
+
     public List<Categoria> findAll() {
-        return categoriaRepository.findAll();
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+        return categoriaRepository.findByUsuarioId(usuarioLogado.getId());
     }
 
     public Categoria findById(Long id) {
-        Optional<Categoria> categoria = categoriaRepository.findById(id);
-        return categoria.orElseThrow(() -> new ResourceNotFoundException(id));
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+
+        return categoriaRepository.findByIdAndUsuarioId(id, usuarioLogado.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+    }
+
+    public Categoria insert(Categoria categoria) {
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+        categoria.setUsuario(usuarioLogado);
+        return categoriaRepository.save(categoria);
     }
 
     public Categoria update(Long id, Categoria obj) {
-        Categoria entity = categoriaRepository.getReferenceById(id);
+        Categoria entity = findById(id);
         updateData(entity, obj);
         return categoriaRepository.save(entity);
     }
@@ -37,17 +49,10 @@ public class CategoriaService {
         entity.setDescricao(obj.getDescricao());
     }
 
-    public Categoria insert(Categoria categoria) {
-        return categoriaRepository.save(categoria);
-    }
-
     public void delete(Long id) {
         try {
-            if (categoriaRepository.existsById(id)) {
-                categoriaRepository.deleteById(id);
-            } else {
-                throw new ResourceNotFoundException(id);
-            }
+            Categoria categoria = findById(id);
+            categoriaRepository.delete(categoria);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }

@@ -22,16 +22,22 @@ public class Categoria implements Serializable {
     private String descricao;
 
     @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @JsonIgnore
     @ManyToMany(mappedBy = "categorias")
     private Set<Produto> produtos = new HashSet<>();
 
     public Categoria() {
     }
 
-    public Categoria(Long id, String nome, String descricao) {
+    public Categoria(Long id, String nome, String descricao, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -58,12 +64,21 @@ public class Categoria implements Serializable {
         this.descricao = descricao;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public Set<Produto> getProdutos() {
         return produtos;
     }
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Categoria categoria = (Categoria) o;
         return Objects.equals(id, categoria.id);
