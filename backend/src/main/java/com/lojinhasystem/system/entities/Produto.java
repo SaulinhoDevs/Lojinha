@@ -23,8 +23,17 @@ public class Produto implements Serializable {
     private Double precoVenda;
     private Double precoCompra;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     @ManyToMany
-    @JoinTable(name = "tb_produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    @JoinTable(
+            name = "tb_produto_categoria",
+            joinColumns = @JoinColumn(name = "produto_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
     private Set<Categoria> categorias = new HashSet<>();
 
     @OneToMany(mappedBy = "id.produto")
@@ -33,56 +42,69 @@ public class Produto implements Serializable {
     public Produto() {
     }
 
-    public Produto(Long id, String nome, Integer estoque, Double precoVenda, Double precoCompra) {
+    public Produto(Long id, String nome, Integer estoque, Double precoVenda, Double precoCompra, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.estoque = estoque;
         this.precoVenda = precoVenda;
         this.precoCompra = precoCompra;
+        this.usuario = usuario;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public Integer getEstoque() {
         return estoque;
     }
 
-    public void setEstoque(Integer estoque) {
-        this.estoque = estoque;
-    }
-
     public Double getPrecoVenda() {
         return precoVenda;
-    }
-
-    public void setPrecoVenda(Double precoVenda) {
-        this.precoVenda = precoVenda;
     }
 
     public Double getPrecoCompra() {
         return precoCompra;
     }
 
-    public void setPrecoCompra(Double precoCompra) {
-        this.precoCompra = precoCompra;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public Set<Categoria> getCategorias() {
         return categorias;
+    }
+
+    public Set<ItemPedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEstoque(Integer estoque) {
+        this.estoque = estoque;
+    }
+
+    public void setPrecoVenda(Double precoVenda) {
+        this.precoVenda = precoVenda;
+    }
+
+    public void setPrecoCompra(Double precoCompra) {
+        this.precoCompra = precoCompra;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @JsonIgnore
@@ -96,6 +118,7 @@ public class Produto implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
         return Objects.equals(id, produto.id);

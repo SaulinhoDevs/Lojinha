@@ -3,6 +3,11 @@ package com.lojinhasystem.system.repositories;
 import com.lojinhasystem.system.entities.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+import java.util.List;
+import java.util.Optional;
 
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+    List<Produto> findByUsuarioId(Long usuarioId);
+
+    Optional<Produto> findByIdAndUsuarioId(Long id, Long usuarioId);
 }
