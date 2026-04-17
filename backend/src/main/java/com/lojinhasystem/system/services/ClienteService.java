@@ -1,6 +1,7 @@
 package com.lojinhasystem.system.services;
 
 import com.lojinhasystem.system.entities.Cliente;
+import com.lojinhasystem.system.entities.Usuario;
 import com.lojinhasystem.system.repositories.ClienteRepository;
 import com.lojinhasystem.system.services.exceptions.DatabaseException;
 import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
@@ -9,7 +10,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -20,23 +20,30 @@ public class ClienteService {
     @Autowired
     private VendaService vendaService;
 
+    @Autowired
+    private UsuarioAutenticadoService usuarioAutenticadoService;
+
     public List<Cliente> findAll() {
-        return clienteRepository.findAll();
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+        return clienteRepository.findByUsuarioId(usuarioLogado.getId());
     }
 
     public Cliente findById(Long id) {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente.orElseThrow(() -> new ResourceNotFoundException(id));
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+
+        return clienteRepository.findByIdAndUsuarioId(id, usuarioLogado.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Cliente update(Long id, Cliente obj) {
-        Cliente entity = clienteRepository.getReferenceById(id);
+        Cliente entity = findById(id);
         updateData(entity, obj);
         return clienteRepository.save(entity);
     }
 
     private void updateData(Cliente entity, Cliente obj) {
         entity.setNome(obj.getNome());
+        entity.setDivida(obj.getDivida());
         entity.setTelefone(obj.getTelefone());
         entity.setRua(obj.getRua());
         entity.setBairro(obj.getBairro());
@@ -44,16 +51,15 @@ public class ClienteService {
     }
 
     public Cliente insert(Cliente cliente) {
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+        cliente.setUsuario(usuarioLogado);
         return clienteRepository.save(cliente);
     }
 
     public void delete(Long id) {
         try {
-            if (clienteRepository.existsById(id)) {
-                clienteRepository.deleteById(id);
-            } else {
-                throw new ResourceNotFoundException(id);
-            }
+            Cliente cliente = findById(id);
+            clienteRepository.delete(cliente);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
