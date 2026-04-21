@@ -1,15 +1,14 @@
 <div class="vendas-container">
-  <!-- Botão para adicionar nova venda -->
   <div class="header">
     <button class="btn add-venda" routerLink="/venda-form">Nova Venda</button>
   </div>
 
-  <!-- Tabela de vendas -->
   <div class="vendas-table">
     <table>
       <thead>
         <tr>
           <th>Data da Venda</th>
+          <th>Cliente</th>
           <th>Frete</th>
           <th>Desconto</th>
           <th>Total</th>
@@ -17,9 +16,11 @@
           <th>Ações</th>
         </tr>
       </thead>
+
       <tbody>
         <tr *ngFor="let venda of vendas">
           <td data-label="Data da Venda">{{ venda.dataVenda | date:'dd/MM/yyyy' }}</td>
+          <td data-label="Cliente">{{ venda.clienteNome }}</td>
           <td data-label="Frete">{{ venda.frete | currency:'BRL' }}</td>
           <td data-label="Desconto">{{ venda.desconto | currency:'BRL' }}</td>
           <td data-label="Total">{{ venda.total | currency:'BRL' }}</td>
@@ -27,7 +28,9 @@
           <td data-label="Ações" class="actions">
             <button class="btn details" [routerLink]="['/vendas', venda.id]">Detalhes</button>
             <button class="btn edit" [routerLink]="['/vendas', venda.id, 'editar']">Editar</button>
-            <button class="btn delete" (click)="excluir(venda.id, venda.cliente?.nome || 'sem nome')">Excluir</button>
+            <button class="btn delete" (click)="excluir(venda.id, venda.clienteNome)">
+              Excluir
+            </button>
           </td>
         </tr>
       </tbody>

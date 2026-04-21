@@ -23,12 +23,17 @@
       <div class="info-grid">
         <div class="info-item">
           <span class="label">Cliente</span>
-          <span class="value">{{ venda.cliente.nome }}</span>
+          <span class="value">{{ venda.clienteNome }}</span>
         </div>
 
         <div class="info-item">
           <span class="label">Status do Pagamento</span>
           <span class="value">{{ statusTradutor[venda.status] }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Data da Venda</span>
+          <span class="value">{{ venda.dataVenda | date:'dd/MM/yyyy' }}</span>
         </div>
 
         <div class="info-item">
@@ -50,10 +55,12 @@
           <span class="label">Itens da Venda</span>
 
           <div class="itens-lista">
-            @for (item of venda.itens; track item.produto.id) {
+            @for (item of venda.itens; track item.produtoId) {
             <div class="item-row">
-              <div class="item-nome">{{ item.produto.nome }}</div>
+              <div class="item-nome">{{ item.produtoNome }}</div>
               <div class="item-qtd">{{ item.quantidade }}x</div>
+              <div class="item-preco">{{ item.precoUnitario | currency:'BRL' }}</div>
+              <div class="item-subtotal">{{ item.subTotal | currency:'BRL' }}</div>
             </div>
             } @empty {
             <span class="value">Nenhum item encontrado nesta venda.</span>

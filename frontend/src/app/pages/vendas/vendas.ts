@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { VendasService } from '../../services/vendas-service';
 import { RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+
+import { VendasService } from '../../services/vendas-service';
+import { Venda } from '../../services/interfaces/venda.model';
 
 @Component({
   selector: 'app-vendas',
@@ -13,12 +15,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class Vendas {
   private vendasService = inject(VendasService);
 
-  public vendas: any[] = [];
+  public vendas: Venda[] = [];
 
   ngOnInit() {
-    this.vendasService.getVendas().subscribe((response: any) => {
-      console.log(response);
-      this.vendas = response;
+    this.vendasService.getVendas().subscribe({
+      next: (response) => {
+        this.vendas = response;
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar vendas:', erro);
+      },
     });
   }
 

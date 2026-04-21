@@ -1,6 +1,9 @@
 import { Produto } from './produto.model';
 
 export interface ItemPedido {
-  produto: Produto;
+  produtoId: number;
+  produtoNome: string;
   quantidade: number;
+  precoUnitario: number;
+  subTotal: number;
 }

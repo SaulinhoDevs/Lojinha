@@ -1,6 +1,7 @@
 package com.lojinhasystem.system.resources;
 
-import com.lojinhasystem.system.entities.Venda;
+import com.lojinhasystem.system.resources.dto.VendaRequestDTO;
+import com.lojinhasystem.system.resources.dto.VendaResponseDTO;
 import com.lojinhasystem.system.services.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,20 +19,20 @@ public class VendaResource {
     private VendaService vendaService;
 
     @GetMapping
-    public ResponseEntity<List<Venda>> findAll() {
-        List<Venda> vendas = vendaService.findAll();
+    public ResponseEntity<List<VendaResponseDTO>> findAll() {
+        List<VendaResponseDTO> vendas = vendaService.findAll();
         return ResponseEntity.ok().body(vendas);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Venda> findById(@PathVariable Long id) {
-        Venda venda = vendaService.findById(id);
+    public ResponseEntity<VendaResponseDTO> findById(@PathVariable Long id) {
+        VendaResponseDTO venda = vendaService.findById(id);
         return ResponseEntity.ok().body(venda);
     }
 
     @PostMapping
-    public ResponseEntity<Venda> insert(@RequestBody Venda obj) {
-        Venda venda = vendaService.insert(obj);
+    public ResponseEntity<VendaResponseDTO> insert(@RequestBody VendaRequestDTO obj) {
+        VendaResponseDTO venda = vendaService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(venda.getId())
@@ -40,9 +41,9 @@ public class VendaResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Venda> update(@PathVariable Long id, @RequestBody Venda obj) {
-        obj = vendaService.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<VendaResponseDTO> update(@PathVariable Long id, @RequestBody VendaRequestDTO obj) {
+        VendaResponseDTO venda = vendaService.update(id, obj);
+        return ResponseEntity.ok().body(venda);
     }
 
     @DeleteMapping(value = "/{id}")

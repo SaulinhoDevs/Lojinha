@@ -1,5 +1,6 @@
 package com.lojinhasystem.system.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lojinhasystem.system.entities.enums.StatusVenda;
 import jakarta.persistence.*;
 
@@ -25,6 +26,11 @@ public class Venda implements Serializable {
 
     private Integer status;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -35,67 +41,76 @@ public class Venda implements Serializable {
     public Venda() {
     }
 
-    public Venda(Long id, LocalDate dataVenda, Double frete, Double desconto, StatusVenda status, Cliente cliente) {
+    public Venda(Long id, LocalDate dataVenda, Double frete, Double desconto, StatusVenda status, Cliente cliente, Usuario usuario) {
         this.id = id;
         this.dataVenda = dataVenda;
         this.frete = frete;
         this.desconto = desconto;
         setStatus(status);
         this.cliente = cliente;
+        this.usuario = usuario;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public LocalDate getDataVenda() {
         return dataVenda;
-    }
-
-    public void setDataVenda(LocalDate dataVenda) {
-        this.dataVenda = dataVenda;
     }
 
     public Double getFrete() {
         return frete;
     }
 
-    public void setFrete(Double frete) {
-        this.frete = frete;
-    }
-
     public Double getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(Double desconto) {
-        this.desconto = desconto;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     public StatusVenda getStatus() {
         return StatusVenda.valueOf(status);
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDataVenda(LocalDate dataVenda) {
+        this.dataVenda = dataVenda;
+    }
+
+    public void setFrete(Double frete) {
+        this.frete = frete;
+    }
+
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public void setStatus(StatusVenda status) {
         if (status != null) {
             this.status = status.getCodigo();
         }
-    }
-
-    public Set<ItemPedido> getItens() {
-        return itens;
     }
 
     public Double getTotal() {
@@ -108,6 +123,7 @@ public class Venda implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Venda venda = (Venda) o;
         return Objects.equals(id, venda.id);

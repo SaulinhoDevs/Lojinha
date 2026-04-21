@@ -9,6 +9,7 @@ import { ClientsService } from '../../services/clients-service';
 
 import { Cliente } from '../../services/interfaces/cliente.model';
 import { Produto } from '../../services/interfaces/produto.model';
+import { Venda } from '../../services/interfaces/venda.model';
 
 @Component({
   selector: 'app-venda-form',
@@ -73,9 +74,9 @@ export class VendaForm implements OnInit {
     this.carregandoVenda = true;
 
     this.vendasService.buscarPorId(id).subscribe({
-      next: (venda) => {
+      next: (venda: Venda) => {
         this.formulario.patchValue({
-          clienteId: venda.cliente?.id ?? '',
+          clienteId: venda.clienteId ?? '',
           status: venda.status,
           frete: venda.frete ?? 0,
           desconto: venda.desconto ?? 0,
@@ -85,9 +86,9 @@ export class VendaForm implements OnInit {
         itensFormArray.clear();
 
         if (venda.itens?.length) {
-          venda.itens.forEach((item: any) => {
+          venda.itens.forEach((item) => {
             itensFormArray.push(
-              this.criarItemFormGroup(item.produto?.id ?? '', item.quantidade ?? 1),
+              this.criarItemFormGroup(item.produtoId ?? '', item.quantidade ?? 1),
             );
           });
         } else {

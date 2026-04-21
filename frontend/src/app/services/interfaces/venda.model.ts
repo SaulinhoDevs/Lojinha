@@ -2,11 +2,13 @@ import { Cliente } from './cliente.model';
 import { ItemPedido } from './itemPedido.model';
 
 export interface Venda {
-  id?: number;
+  id: number;
+  dataVenda?: string;
   frete: number;
   desconto: number;
   total: number;
   status: number;
-  cliente: Cliente;
+  clienteId: number;
+  clienteNome: string;
   itens: ItemPedido[];
 }

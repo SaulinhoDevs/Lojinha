@@ -15,6 +15,7 @@ public class ItemPedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
@@ -52,24 +53,25 @@ public class ItemPedido implements Serializable {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
     public Double getPrecoUnitario() {
         return precoUnitario;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
     public void setPrecoUnitario(Double precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
 
-    public Double getSubTotal(){
+    public Double getSubTotal() {
         return getPrecoUnitario() * getQuantidade();
     }
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ItemPedido that = (ItemPedido) o;
         return Objects.equals(id, that.id);

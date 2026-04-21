@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
 export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
-  let router = inject(Router);
+  const router = inject(Router);
 
-  let token = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
   if (token) {
     request = request.clone({
@@ -19,6 +19,7 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401 || err.status === 403) {
           localStorage.removeItem('token');
+
           if (!router.url.includes('/login')) {
             router.navigate(['/login']);
           }

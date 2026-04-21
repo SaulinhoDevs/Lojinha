@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+
 import { VendasService } from '../../services/vendas-service';
 import { Venda } from '../../services/interfaces/venda.model';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-venda-details',
@@ -14,11 +15,10 @@ export class VendaDetails {
   private route = inject(ActivatedRoute);
   private vendasService = inject(VendasService);
 
-  venda?: Venda; // Troque 'any' pela interface Venda
+  venda?: Venda;
   carregando = true;
   erro = '';
 
-  // O nosso Dicionário de Tradução de Status que fizemos antes!
   statusTradutor: { [key: number]: string } = {
     1: 'Pago',
     2: 'Aguardando Pagamento',
@@ -37,20 +37,20 @@ export class VendaDetails {
       this.erro = 'ID da venda inválido.';
       this.carregando = false;
       return;
-    } else {
-      this.carregando = true;
-      this.erro = '';
-
-      this.vendasService.buscarPorId(id).subscribe({
-        next: (resposta) => {
-          this.venda = resposta;
-          this.carregando = false;
-        },
-        error: () => {
-          this.erro = 'Não foi possível carregar os dados da venda.';
-          this.carregando = false;
-        },
-      });
     }
+
+    this.carregando = true;
+    this.erro = '';
+
+    this.vendasService.buscarPorId(id).subscribe({
+      next: (resposta: Venda) => {
+        this.venda = resposta;
+        this.carregando = false;
+      },
+      error: () => {
+        this.erro = 'Não foi possível carregar os dados da venda.';
+        this.carregando = false;
+      },
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Venda } from './interfaces/venda.model';
 
 @Injectable({ providedIn: 'root' })
 export class VendasService {
@@ -8,17 +9,17 @@ export class VendasService {
 
   private http = inject(HttpClient);
 
-  getVendas(): Observable<any[]> {
-    return this.http.get<any[]>(`${VendasService.BASE_PATH}/vendas`);
+  getVendas(): Observable<Venda[]> {
+    return this.http.get<Venda[]>(`${VendasService.BASE_PATH}/vendas`);
   }
 
-  buscarPorId(id: number): Observable<any> {
-    return this.http.get<any>(`${VendasService.BASE_PATH}/vendas/${id}`);
+  buscarPorId(id: number): Observable<Venda> {
+    return this.http.get<Venda>(`${VendasService.BASE_PATH}/vendas/${id}`);
   }
 
-  saveVenda(dadosBrutos: any): Observable<any> {
+  saveVenda(dadosBrutos: any): Observable<Venda> {
     const itensMapeados = dadosBrutos.itens.map((item: any) => ({
-      produto: { id: Number(item.produtoId) },
+      produtoId: Number(item.produtoId),
       quantidade: Number(item.quantidade),
     }));
 
@@ -26,29 +27,28 @@ export class VendasService {
       frete: Number(dadosBrutos.frete ?? 0),
       desconto: Number(dadosBrutos.desconto ?? 0),
       status: Number(dadosBrutos.status),
-      cliente: { id: Number(dadosBrutos.clienteId) },
+      clienteId: Number(dadosBrutos.clienteId),
       itens: itensMapeados,
     };
 
-    return this.http.post<any>(`${VendasService.BASE_PATH}/vendas`, vendaParaSalvar);
+    return this.http.post<Venda>(`${VendasService.BASE_PATH}/vendas`, vendaParaSalvar);
   }
 
-  updateVenda(id: number, dadosBrutos: any): Observable<any> {
+  updateVenda(id: number, dadosBrutos: any): Observable<Venda> {
     const itensMapeados = dadosBrutos.itens.map((item: any) => ({
-      produto: { id: Number(item.produtoId) },
+      produtoId: Number(item.produtoId),
       quantidade: Number(item.quantidade),
     }));
 
     const vendaParaAtualizar = {
-      id,
       frete: Number(dadosBrutos.frete ?? 0),
       desconto: Number(dadosBrutos.desconto ?? 0),
       status: Number(dadosBrutos.status),
-      cliente: { id: Number(dadosBrutos.clienteId) },
+      clienteId: Number(dadosBrutos.clienteId),
       itens: itensMapeados,
     };
 
-    return this.http.put<any>(`${VendasService.BASE_PATH}/vendas/${id}`, vendaParaAtualizar);
+    return this.http.put<Venda>(`${VendasService.BASE_PATH}/vendas/${id}`, vendaParaAtualizar);
   }
 
   deleteVenda(id: number): Observable<void> {
