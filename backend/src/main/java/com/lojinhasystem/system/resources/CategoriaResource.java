@@ -1,6 +1,7 @@
 package com.lojinhasystem.system.resources;
 
-import com.lojinhasystem.system.entities.Categoria;
+import com.lojinhasystem.system.resources.dto.CategoriaRequestDTO;
+import com.lojinhasystem.system.resources.dto.CategoriaResponseDTO;
 import com.lojinhasystem.system.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,20 +19,20 @@ public class CategoriaResource {
     private CategoriaService categoriaService;
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> findAll() {
-        List<Categoria> categorias = categoriaService.findAll();
+    public ResponseEntity<List<CategoriaResponseDTO>> findAll() {
+        List<CategoriaResponseDTO> categorias = categoriaService.findAll();
         return ResponseEntity.ok().body(categorias);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Categoria> findById(@PathVariable Long id) {
-        Categoria categoria = categoriaService.findById(id);
+    public ResponseEntity<CategoriaResponseDTO> findById(@PathVariable Long id) {
+        CategoriaResponseDTO categoria = categoriaService.findById(id);
         return ResponseEntity.ok().body(categoria);
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> insert(@RequestBody Categoria obj) {
-        Categoria categoria = categoriaService.insert(obj);
+    public ResponseEntity<CategoriaResponseDTO> insert(@RequestBody CategoriaRequestDTO obj) {
+        CategoriaResponseDTO categoria = categoriaService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(categoria.getId())
@@ -40,8 +41,8 @@ public class CategoriaResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody Categoria obj) {
-        Categoria categoria = categoriaService.update(id, obj);
+    public ResponseEntity<CategoriaResponseDTO> update(@PathVariable Long id, @RequestBody CategoriaRequestDTO obj) {
+        CategoriaResponseDTO categoria = categoriaService.update(id, obj);
         return ResponseEntity.ok().body(categoria);
     }
 

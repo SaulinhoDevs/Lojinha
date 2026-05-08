@@ -1,6 +1,7 @@
 package com.lojinhasystem.system.resources;
 
-import com.lojinhasystem.system.entities.Cliente;
+import com.lojinhasystem.system.resources.dto.ClienteRequestDTO;
+import com.lojinhasystem.system.resources.dto.ClienteResponseDTO;
 import com.lojinhasystem.system.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,20 +19,20 @@ public class ClienteResource {
     private ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> findAll() {
-        List<Cliente> clientes = clienteService.findAll();
+    public ResponseEntity<List<ClienteResponseDTO>> findAll() {
+        List<ClienteResponseDTO> clientes = clienteService.findAll();
         return ResponseEntity.ok().body(clientes);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Cliente> findById(@PathVariable Long id) {
-        Cliente cliente = clienteService.findById(id);
+    public ResponseEntity<ClienteResponseDTO> findById(@PathVariable Long id) {
+        ClienteResponseDTO cliente = clienteService.findById(id);
         return ResponseEntity.ok().body(cliente);
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> insert(@RequestBody Cliente obj) {
-        Cliente cliente = clienteService.insert(obj);
+    public ResponseEntity<ClienteResponseDTO> insert(@RequestBody ClienteRequestDTO obj) {
+        ClienteResponseDTO cliente = clienteService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(cliente.getId())
@@ -39,15 +40,15 @@ public class ClienteResource {
         return ResponseEntity.created(uri).body(cliente);
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ClienteResponseDTO> update(@PathVariable Long id, @RequestBody ClienteRequestDTO obj) {
+        ClienteResponseDTO cliente = clienteService.update(id, obj);
+        return ResponseEntity.ok().body(cliente);
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         clienteService.delete(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente obj) {
-        Cliente cliente = clienteService.update(id, obj);
-        return ResponseEntity.ok().body(cliente);
     }
 }

@@ -3,6 +3,8 @@ package com.lojinhasystem.system.services;
 import com.lojinhasystem.system.entities.Categoria;
 import com.lojinhasystem.system.entities.Usuario;
 import com.lojinhasystem.system.repositories.CategoriaRepository;
+import com.lojinhasystem.system.resources.dto.CategoriaRequestDTO;
+import com.lojinhasystem.system.resources.dto.CategoriaResponseDTO;
 import com.lojinhasystem.system.services.exceptions.DatabaseException;
 import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,41 +22,56 @@ public class CategoriaService {
     @Autowired
     private UsuarioAutenticadoService usuarioAutenticadoService;
 
-    public List<Categoria> findAll() {
+    public List<CategoriaResponseDTO> findAll() {
         Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
-        return categoriaRepository.findByUsuarioId(usuarioLogado.getId());
+        return categoriaRepository.findByUsuarioId(usuarioLogado.getId())
+                .stream()
+                .map(CategoriaResponseDTO::new)
+                .toList();
     }
 
-    public Categoria findById(Long id) {
-        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
-
-        return categoriaRepository.findByIdAndUsuarioId(id, usuarioLogado.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(id));
+    public CategoriaResponseDTO findById(Long id) {
+        Categoria categoria = findEntityById(id);
+        return new CategoriaResponseDTO(categoria);
     }
 
-    public Categoria insert(Categoria categoria) {
+    public CategoriaResponseDTO insert(CategoriaRequestDTO dto) {
         Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+
+        Categoria categoria = new Categoria();
+        categoria.setNome(dto.getNome());
+        categoria.setDescricao(dto.getDescricao());
         categoria.setUsuario(usuarioLogado);
-        return categoriaRepository.save(categoria);
+
+        categoria = categoriaRepository.save(categoria);
+        return new CategoriaResponseDTO(categoria);
     }
 
-    public Categoria update(Long id, Categoria obj) {
-        Categoria entity = findById(id);
-        updateData(entity, obj);
-        return categoriaRepository.save(entity);
-    }
-
-    private void updateData(Categoria entity, Categoria obj) {
-        entity.setNome(obj.getNome());
-        entity.setDescricao(obj.getDescricao());
+    public CategoriaResponseDTO update(Long id, CategoriaRequestDTO dto) {
+        Categoria entity = findEntityById(id);
+        updateData(entity, dto);
+        entity = categoriaRepository.save(entity);
+        return new CategoriaResponseDTO(entity);
     }
 
     public void delete(Long id) {
         try {
-            Categoria categoria = findById(id);
+            Categoria categoria = findEntityById(id);
             categoriaRepository.delete(categoria);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
+    }
+
+    private void updateData(Categoria entity, CategoriaRequestDTO dto) {
+        entity.setNome(dto.getNome());
+        entity.setDescricao(dto.getDescricao());
+    }
+
+    private Categoria findEntityById(Long id) {
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+
+        return categoriaRepository.findByIdAndUsuarioId(id, usuarioLogado.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }

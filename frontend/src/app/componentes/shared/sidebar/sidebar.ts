@@ -13,11 +13,11 @@ export class Sidebar {
   constructor(private router: Router) {}
 
   menuItems = [
-  { label: 'Início', route: '/inicio' },
-  { label: 'Produtos', route: '/produtos' },
-  { label: 'Categorias', route: '/categorias' },
-  { label: 'Vendas', route: '/vendas' },
-  { label: 'Clientes', route: '/clientes' },
+    { label: 'Início', route: '/inicio' },
+    { label: 'Produtos', route: '/produtos' },
+    { label: 'Categorias', route: '/categorias' },
+    { label: 'Clientes', route: '/clientes' },
+    { label: 'Vendas', route: '/vendas' },
   ];
 
   logout() {

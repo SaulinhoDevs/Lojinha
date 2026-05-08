@@ -6,5 +6,13 @@ export interface Produto {
   estoque: number;
   precoVenda: number;
   precoCompra: number;
-  categorias: Partial<Categoria>[];
+  categorias: Categoria[];
+}
+
+export interface ProdutoRequest {
+  nome: string;
+  estoque: number;
+  precoVenda: number;
+  precoCompra: number;
+  categoriasIds: number[];
 }

@@ -5,6 +5,8 @@ import com.lojinhasystem.system.entities.Produto;
 import com.lojinhasystem.system.entities.Usuario;
 import com.lojinhasystem.system.repositories.CategoriaRepository;
 import com.lojinhasystem.system.repositories.ProdutoRepository;
+import com.lojinhasystem.system.resources.dto.ProdutoRequestDTO;
+import com.lojinhasystem.system.resources.dto.ProdutoResponseDTO;
 import com.lojinhasystem.system.services.exceptions.DatabaseException;
 import com.lojinhasystem.system.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,76 +29,90 @@ public class ProdutoService {
     @Autowired
     private UsuarioAutenticadoService usuarioAutenticadoService;
 
-    public List<Produto> findAll() {
+    public List<ProdutoResponseDTO> findAll() {
         Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
-        return produtoRepository.findByUsuarioId(usuarioLogado.getId());
+        return produtoRepository.findByUsuarioId(usuarioLogado.getId())
+                .stream()
+                .map(ProdutoResponseDTO::new)
+                .toList();
     }
 
-    public Produto findById(Long id) {
-        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
-
-        return produtoRepository.findByIdAndUsuarioId(id, usuarioLogado.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(id));
+    public ProdutoResponseDTO findById(Long id) {
+        Produto produto = findEntityById(id);
+        return new ProdutoResponseDTO(produto);
     }
 
-    public Produto insert(Produto produto) {
+    public ProdutoResponseDTO insert(ProdutoRequestDTO dto) {
         Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
 
         Set<Categoria> categoriasValidadas = validarCategoriasDoUsuario(
-                produto.getCategorias(),
+                dto.getCategoriasIds(),
                 usuarioLogado.getId()
         );
 
         Produto novoProduto = new Produto();
-        novoProduto.setNome(produto.getNome());
-        novoProduto.setEstoque(produto.getEstoque());
-        novoProduto.setPrecoVenda(produto.getPrecoVenda());
-        novoProduto.setPrecoCompra(produto.getPrecoCompra());
+        novoProduto.setNome(dto.getNome());
+        novoProduto.setEstoque(dto.getEstoque());
+        novoProduto.setPrecoVenda(dto.getPrecoVenda());
+        novoProduto.setPrecoCompra(dto.getPrecoCompra());
         novoProduto.setUsuario(usuarioLogado);
         novoProduto.getCategorias().addAll(categoriasValidadas);
 
-        return produtoRepository.save(novoProduto);
+        novoProduto = produtoRepository.save(novoProduto);
+        return new ProdutoResponseDTO(novoProduto);
+    }
+
+    public ProdutoResponseDTO update(Long id, ProdutoRequestDTO dto) {
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+
+        Produto produto = findEntityById(id);
+        updateData(produto, dto, usuarioLogado.getId());
+
+        produto = produtoRepository.save(produto);
+        return new ProdutoResponseDTO(produto);
     }
 
     public void delete(Long id) {
         try {
-            Produto produto = findById(id);
+            Produto produto = findEntityById(id);
             produtoRepository.delete(produto);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
     }
 
-    public Produto update(Long id, Produto obj) {
-        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
-
-        Produto produto = findById(id);
-        updateData(produto, obj, usuarioLogado.getId());
-
-        return produtoRepository.save(produto);
-    }
-
-    private void updateData(Produto produto, Produto obj, Long usuarioId) {
-        produto.setNome(obj.getNome());
-        produto.setEstoque(obj.getEstoque());
-        produto.setPrecoVenda(obj.getPrecoVenda());
-        produto.setPrecoCompra(obj.getPrecoCompra());
+    private void updateData(Produto produto, ProdutoRequestDTO dto, Long usuarioId) {
+        produto.setNome(dto.getNome());
+        produto.setEstoque(dto.getEstoque());
+        produto.setPrecoVenda(dto.getPrecoVenda());
+        produto.setPrecoCompra(dto.getPrecoCompra());
 
         produto.getCategorias().clear();
-        produto.getCategorias().addAll(validarCategoriasDoUsuario(obj.getCategorias(), usuarioId));
+        produto.getCategorias().addAll(validarCategoriasDoUsuario(dto.getCategoriasIds(), usuarioId));
     }
 
-    private Set<Categoria> validarCategoriasDoUsuario(Set<Categoria> categorias, Long usuarioId) {
+    private Set<Categoria> validarCategoriasDoUsuario(List<Long> categoriasIds, Long usuarioId) {
         Set<Categoria> categoriasValidadas = new HashSet<>();
 
-        for (Categoria categoria : categorias) {
+        if (categoriasIds == null) {
+            return categoriasValidadas;
+        }
+
+        for (Long categoriaId : categoriasIds) {
             Categoria categoriaValida = categoriaRepository
-                    .findByIdAndUsuarioId(categoria.getId(), usuarioId)
-                    .orElseThrow(() -> new ResourceNotFoundException(categoria.getId()));
+                    .findByIdAndUsuarioId(categoriaId, usuarioId)
+                    .orElseThrow(() -> new ResourceNotFoundException(categoriaId));
 
             categoriasValidadas.add(categoriaValida);
         }
 
         return categoriasValidadas;
+    }
+
+    private Produto findEntityById(Long id) {
+        Usuario usuarioLogado = usuarioAutenticadoService.getUsuarioLogado();
+
+        return produtoRepository.findByIdAndUsuarioId(id, usuarioLogado.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 }
