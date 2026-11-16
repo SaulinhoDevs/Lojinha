@@ -24,8 +24,8 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Usuario usuarioPF = new UsuarioPF(null, "Teste PF", "testepf@teste.com", "$2a$12$9mqmBztcEr/awMfTabweMuoubkYk8IgUleIwDZtSMqODUYk5r.QJS", "Teste PF", "Teste bairroPF", 123, "11999998888", "12345678901");
-        Usuario usuarioPJ = new UsuarioPJ(null, "Teste PJ", "testepj@teste.com", "$2a$12$dxQXWcW2HbsENxL.X6t5deJj4sUFoiwi7Haep4xMUbvd6cBkD4i.W", "Teste PJ", "Teste bairroPJ", 456, "22888887777", "10987654321");
+        Usuario usuarioPF = new UsuarioPF(null, "Teste PF", "testepf@teste.com", "$2a$12$hud7VrkO/lMHeP2AEmbB4..VTYzh/Q5/iGE7V45IY5uz1X9Me1jk6", "Teste PF", "Teste bairroPF", 123, "11999998888", "12345678901");
+        Usuario usuarioPJ = new UsuarioPJ(null, "Teste PJ", "testepj@teste.com", "$2a$12$hud7VrkO/lMHeP2AEmbB4..VTYzh/Q5/iGE7V45IY5uz1X9Me1jk6", "Teste PJ", "Teste bairroPJ", 456, "22888887777", "10987654321");
 
         usuarioRepository.saveAll(Arrays.asList(usuarioPF, usuarioPJ));
 
