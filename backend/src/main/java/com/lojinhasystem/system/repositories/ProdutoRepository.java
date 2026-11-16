@@ -10,4 +10,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     List<Produto> findByUsuarioId(Long usuarioId);
 
     Optional<Produto> findByIdAndUsuarioId(Long id, Long usuarioId);
+
+    List<Produto> findByUsuarioIdAndEstoqueLessThanEqual(Long usuarioId, Integer limite);
 }
